@@ -1,7 +1,11 @@
 {
+	"x" : 0,
+	"y" : 0,
+	"width" : 0,
+	"height" : 0,
 	"health" : 100,
 	"hunger" : 0,
 	"thirst" : 0,
 	"energy" : 100,
-	"components" : []
+	"tags" : ["draw"]
 }
