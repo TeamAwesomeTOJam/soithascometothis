@@ -1,0 +1,7 @@
+{
+    "x" : 0,
+    "y" : 670,
+    "target" : "player1",
+    "direction" : 1,
+    "includes" : ["actionui"]
+}

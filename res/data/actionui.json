@@ -1,0 +1,6 @@
+{
+    "width" : 150,
+    "height" : 50,
+    "components" : ["DrawActionsComponent"],
+    "tags" : ["ui"]
+}
