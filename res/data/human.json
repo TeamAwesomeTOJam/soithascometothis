@@ -1,0 +1,7 @@
+{
+	"health" : 100,
+	"hunger" : 0,
+	"thirst" : 0,
+	"energy" : 100,
+	"components" : []
+}
