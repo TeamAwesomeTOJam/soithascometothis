@@ -214,7 +214,7 @@ class HumanGrabberComponent(Component):
                     entity.grabbed_human = closest
                     closest.handle('grabbed', entity)
             elif event.value == 0:
-                entity.grabbed_human.handle('ungrabbed', entity)
+                entity.grabbed_human.handle('released', entity)
                 entity.grabbed_human = None
     
     def handle_update(self, entity, dt):
