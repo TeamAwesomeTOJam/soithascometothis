@@ -167,7 +167,7 @@ class PlayerCollisionComponent(Component):
             if get_midpoint(entity).get_distance(get_midpoint(other)) < entity.width/2 + other.width/2:
                 game.get_game().change_mode(mode.BetweenRoundMode())
                 
-class MouseMovementComponent(object):
+class MouseMovementComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y'])
@@ -182,7 +182,7 @@ class MouseMovementComponent(object):
             entity.y = event.value[1]
 
 
-class HumanGrabberComponent(object):
+class HumanGrabberComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y'])
@@ -195,6 +195,7 @@ class HumanGrabberComponent(object):
         
     def handle_input(self, entity, event):
         if event.action == 'CLICK':
+            print 'hello'
             humans = game.get_game().entity_manager.get_by_tag('human')
             my_pos = Vec2d(entity.x, entity.y)
             closest = None

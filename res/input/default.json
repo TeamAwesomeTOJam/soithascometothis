@@ -3,7 +3,7 @@
     "KEY 292" : ["GAME", "FULLSCREEN"],
     "KEY 293" : ["GAME", "RELOAD"],
     
-    "MOUSE 0" : ["mouse","CLICK"],
+    "MOUSE 1" : ["mouse","CLICK"],
     
     "KEY 119" : ["player1", "UP"],
     "KEY 115" : ["player1", "DOWN"],
