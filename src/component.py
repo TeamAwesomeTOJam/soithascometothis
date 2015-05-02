@@ -159,7 +159,7 @@ class MouseMovementComponent(Component):
 class HumanGrabberComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y', 'grab_range', ('grabbed_human', None)])
+        verify_attrs(entity, ['x', 'y', 'grab_range', ('grabbed_human', None), ('dragging', False)])
         entity.register_handler('input', self.handle_input)
         entity.register_handler('update', self.handle_update)
     
@@ -187,10 +187,12 @@ class HumanGrabberComponent(Component):
                 if distance < entity.grab_range:
                     entity.grabbed_human = closest
                     closest.handle('grabbed', entity)
+                    entity.dragging = True
             elif event.value == 0:
                 if entity.grabbed_human:
                     entity.grabbed_human.handle('released', entity)
                     entity.grabbed_human = None
+                    entity.dragging = False
     
     def handle_update(self, entity, dt):
         if entity.grabbed_human:
@@ -309,13 +311,13 @@ class ResourceMeterMouseOverComponent(Component):
         if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
             
             pos = Vec2d(mouse_entity.x, mouse_entity.y)
-            amount = game.get_game().entity_manager.get_by_name(entity.tracking_entity).__getattr__(entity.tracking_resource)
+            amount = getattr(game.get_game().entity_manager.get_by_name(entity.tracking_entity), entity.tracking_resource)
             
             f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
             s = f.render(entity.description + ' ' + str(amount) + "/100", True, (255,255,0))
             
             r = s.get_rect()
-            r.bottomright = pos
+            r.topright = pos
             
             surface.blit(s, r)
             
@@ -329,22 +331,47 @@ class HumanMouseOverComponent(Component):
         
     def handle_draw(self, entity, surface):
         mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
-        if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
+        if not mouse_entity.dragging and get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
             
             pos = Vec2d(mouse_entity.x, mouse_entity.y)
             
             offset = 0
             
             for attr in ['health', 'hunger', 'thirst', 'energy', 'strength']:
-                amount = entity.__getattr__(attr)
+                amount = getattr(entity, attr)
                 
                 f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
                 s = f.render(attr + ' ' + str(amount) + "/100", True, (255,255,0))
                 
                 r = s.get_rect()
-                r.midright = pos
+                r.topright = pos
                 r.move_ip(0,offset)
+                offset += r.height+10
                 
+                surface.blit(s, r)
+                
+class CampLocationMouseOverComponent(Component):
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', 'width', 'height', 'description'])
+        entity.register_handler('draw', self.handle_draw)
+        
+    def remove(self, entity):
+        entity.remove_handler('draw', self.handle_draw)
+        
+    def handle_draw(self, entity, surface):
+        mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
+        if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
+            
+            pos = Vec2d(mouse_entity.x, mouse_entity.y)
+            
+            offset = 0
+            for line in entity.description.split("\n"):
+                f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+                s = f.render(line, True, (255,255,0))
+                
+                r = s.get_rect()
+                r.topright = pos
+                r.move_ip(0,offset)
                 offset += r.height+10
                 
                 surface.blit(s, r)
