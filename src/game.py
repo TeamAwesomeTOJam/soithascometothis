@@ -47,11 +47,11 @@ class Game(object):
     def run(self, mode):
         self.entity_manager.add_entity(Entity('camp'))
         
-        self.entity_manager.add_entity(Entity('human'))
-        self.entity_manager.add_entity(Entity('human'))
-        self.entity_manager.add_entity(Entity('human'))
-        self.entity_manager.add_entity(Entity('human'))
-        self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('human', name='Alice'))
+        self.entity_manager.add_entity(Entity('human', name='Bob'))
+        self.entity_manager.add_entity(Entity('human', name='Chris'))
+        self.entity_manager.add_entity(Entity('human', name='Doris'))
+        self.entity_manager.add_entity(Entity('human', name='Esther'))
         
         self.entity_manager.add_entity(Entity('mouse'))
         
