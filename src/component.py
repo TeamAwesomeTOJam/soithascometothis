@@ -212,7 +212,9 @@ class HumanGrabberComponent(Component):
                             distance = new_distance
                 if distance < entity.grab_range:
                     entity.grabbed_human = closest
+                    closest.handle('grabbed', entity)
             elif event.value == 0:
+                entity.grabbed_human.handle('ungrabbed', entity)
                 entity.grabbed_human = None
     
     def handle_update(self, entity, dt):
