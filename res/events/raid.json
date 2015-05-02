@@ -1,21 +1,28 @@
 [{
     "id" : 1,
     "text" : "A thing is happening.",
-    "requirements" : {"energy" : 50},
-    "pass" : 2,
-    "fail" : 3
-}, 
-
+    "options" : [{
+        "text" : "Frob the doodad.",
+        "requirements" : {"energy" : 50},
+        "pass" : 2,
+        "fail" : 3
+    }]
+},
 {
     "id" : 2,
     "text" : "It worked, hurrah!",
-    "effect" : {"food" : 10}
+    "effect" : {"food" : 10},
+    "options" : [{
+        "text" : "Ok..."
+    }]
 },
-
 {
     "id" : 3,
     "text" : "It failed, you suck",
-    "effect" : {"food" : -10}
+    "effect" : {"food" : -10},
+    "options" : [{
+        "text" : "Ok..."
+    }]
 }
 ]
 
