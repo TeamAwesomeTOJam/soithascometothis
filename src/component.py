@@ -185,7 +185,7 @@ class MouseMovementComponent(Component):
 class HumanGrabberComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y'])
+        verify_attrs(entity, ['x', 'y', 'grab_range'])
         entity.register_handler('input', self.handle_input)
         entity.register_handler('update', self.handle_update)
     
@@ -195,27 +195,30 @@ class HumanGrabberComponent(Component):
         
     def handle_input(self, entity, event):
         if event.action == 'CLICK':
-            print 'hello'
-            humans = game.get_game().entity_manager.get_by_tag('human')
-            my_pos = Vec2d(entity.x, entity.y)
-            closest = None
-            distance = 0
-            for h in humans:
-                other_pos = get_midpoint(h)
-                if closest == None:
-                    closest = h
-                    distance = my_pos.get_distance(other_pos)
-                else:
-                    new_distance = my_pos.get_distance(other_pos)
-                    if new_distance < distance:
+            if event.value == 1:
+                humans = game.get_game().entity_manager.get_by_tag('human')
+                my_pos = Vec2d(entity.x, entity.y)
+                closest = None
+                distance = 0
+                for h in humans:
+                    other_pos = get_midpoint(h)
+                    if closest == None:
                         closest = h
-                        distance = new_distance
-            entity.grabbed_human = closest
+                        distance = my_pos.get_distance(other_pos)
+                    else:
+                        new_distance = my_pos.get_distance(other_pos)
+                        if new_distance < distance:
+                            closest = h
+                            distance = new_distance
+                if distance < entity.grab_range:
+                    entity.grabbed_human = closest
+            elif event.value == 0:
+                entity.grabbed_human = None
     
     def handle_update(self, entity, dt):
         if entity.grabbed_human:
-            entity.grabbed_human.x = entity.x
-            entity.grabbed_human.y = entity.y
+            entity.grabbed_human.x = entity.x - entity.grabbed_human.width/2
+            entity.grabbed_human.y = entity.y - entity.grabbed_human.height/2
         
 def verify_attrs(entity, attrs):
     missing_attrs = []
