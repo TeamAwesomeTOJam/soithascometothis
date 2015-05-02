@@ -305,87 +305,49 @@ class ResourceMeterMouseOverComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', 'width', 'height', 'description', 'tracking_entity', 'tracking_resource'])
-        entity.register_handler('draw', self.handle_draw)
+        entity.register_handler('update', self.handle_update)
         
     def remove(self, entity):
-        entity.remove_handler('draw', self.handle_draw)
+        entity.remove_handler('update', self.handle_update)
         
-    def handle_draw(self, entity, surface):
+    def handle_update(self, entity, dt):
         mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
         if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
-            
-            pos = Vec2d(mouse_entity.x, mouse_entity.y)
             amount = getattr(game.get_game().entity_manager.get_by_name(entity.tracking_entity), entity.tracking_resource)
-            
-            f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
-            s = f.render(entity.description + ' ' + str(amount) + "/100", True, (255,255,0))
-            
-            r = s.get_rect()
-            r.topright = pos
-            
-            surface.blit(s, r)
+            info_entity = game.get_game().entity_manager.get_by_name('info-window')
+            info_entity.text = entity.description + '\n' + str(amount) + "/100"
             
 class HumanMouseOverComponent(Component):
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', 'width', 'height', 'name'])
-        entity.register_handler('draw', self.handle_draw)
+        entity.register_handler('update', self.handle_update)
         
     def remove(self, entity):
-        entity.remove_handler('draw', self.handle_draw)
+        entity.remove_handler('update', self.handle_update)
         
-    def handle_draw(self, entity, surface):
+    def handle_update(self, entity, dt):
         mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
         if not mouse_entity.dragging and get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
-            
-            pos = Vec2d(mouse_entity.x, mouse_entity.y)
-            
-            f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
-            s = f.render(entity.name, True, (255,255,0))
-            
-            r = s.get_rect()
-            r.topright = pos
-            offset = r.height+10
-            
-            surface.blit(s, r)
-            
+            info_entity = game.get_game().entity_manager.get_by_name('info-window')
+            info_entity.text = entity.name
+
             for attr in ['health', 'hunger', 'thirst', 'energy', 'strength']:
                 amount = getattr(entity, attr)
-                
-                f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
-                s = f.render(attr + ' ' + str(amount) + "/100", True, (255,255,0))
-                
-                r = s.get_rect()
-                r.topright = pos
-                r.move_ip(0,offset)
-                offset += r.height+10
-                
-                surface.blit(s, r)
+                info_entity.text += '\n' + attr + ' ' + str(amount) + "/100"
                 
 class CampLocationMouseOverComponent(Component):
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', 'width', 'height', 'description'])
-        entity.register_handler('draw', self.handle_draw)
+        entity.register_handler('update', self.handle_update)
         
     def remove(self, entity):
-        entity.remove_handler('draw', self.handle_draw)
+        entity.remove_handler('update', self.handle_update)
         
-    def handle_draw(self, entity, surface):
+    def handle_update(self, entity, dt):
         mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
         if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
-            
-            pos = Vec2d(mouse_entity.x, mouse_entity.y)
-            
-            offset = 0
-            for line in entity.description.split("\n"):
-                f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
-                s = f.render(line, True, (255,255,0))
-                
-                r = s.get_rect()
-                r.topright = pos
-                r.move_ip(0,offset)
-                offset += r.height+10
-                
-                surface.blit(s, r)
+            info_entity = game.get_game().entity_manager.get_by_name('info-window')
+            info_entity.text = entity.description
 
 class GoHomeComponent(Component):
     
@@ -441,7 +403,34 @@ class FarmComponent(Component):
             entity.humans[0].energy -= 10
             game.get_game().entity_manager.get_by_name('camp').food += 10
             game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Farm', 'A tough day on the farm. Gained 10 food, but %s lost 10 energy.' % entity.humans[0].name)
+
+class DrawTextComponent(Component):
+    def add(self, entity):
+        verify_attrs(entity, ['text', 'x', 'y', 'width', 'height'])
+        entity.register_handler('draw', self.handle_draw)
+    
+    def remove(self, entity):
+        entity.unregister_handler('draw', self.handle_draw)
+    
+    def handle_draw(self, entity, surface):
         
+        box = get_box(entity)
+        
+        pygame.draw.rect(surface,(50,50,50),box)
+        
+        pos = Vec2d(entity.x + 10, entity.y + 10)
+        offset = 0
+        for line in entity.text.split("\n"):
+            f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+            s = f.render(line, True, (255,255,0))
+            
+            r = s.get_rect()
+            r.topleft = pos
+            r.move_ip(0,offset)
+            offset += r.height+10
+            
+            surface.blit(s, r)
+    
 
 def get_entities_in_front(entity):
     COLLIDE_BOX_WIDTH = 100

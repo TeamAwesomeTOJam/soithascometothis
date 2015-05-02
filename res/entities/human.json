@@ -13,7 +13,7 @@
 	"energy" : 100,
 	"strength" : 100,
 	
-	"tags" : ["draw","human"],
+	"tags" : ["draw","human", "update"],
 	"components" : ["DrawHitBoxComponent",
 					"HumanPlacementComponent",
 					"HumanMouseOverComponent",

@@ -7,6 +7,7 @@ class ComponentManager(object):
         self.components = {}
         
     def register_component(self, component):
+        print component.__class__.__name__
         self.components[component.__class__.__name__] = component
         
     def register_module(self, module):
@@ -14,8 +15,8 @@ class ComponentManager(object):
             try:
                 if issubclass(value, Component):
                     self.components[name] = value()
-            except:
-                pass
+            except Exception , e:
+                print e
         
     def add(self, name, entity):
         self.components[name].add(entity)
