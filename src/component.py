@@ -218,8 +218,8 @@ class HumanPlacementComponent(Component):
         entity.register_handler('released', self.handle_released)
 
     def remove(self, entity):
-        entity.remove_handler('grabbed', self.handle_grabbed)
-        entity.remove_handler('released', self.handle_released)
+        entity.unregister_handler('grabbed', self.handle_grabbed)
+        entity.unregister_handler('released', self.handle_released)
         
     def handle_grabbed(self, entity, grabber):
         pass
@@ -238,7 +238,7 @@ class HumanAcceptor(Component):
         entity.register_handler('human_placed', self.handle_human_placed)
     
     def remove(self, entity):
-        entity.remove_handler('human_placed', self.handle_human_placed)
+        entity.unregister_handler('human_placed', self.handle_human_placed)
         
     def handle_human_placed(self, entity, human):
         entity.humans.append(human)
@@ -281,6 +281,19 @@ def verify_attrs(entity, attrs):
         raise AttributeError("entity [%s] is missing required attributes [%s]" % (entity._static_data_name, missing_attrs))
 
 
+class RecordUpdateComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, [('updates', {})])
+        entity.register_handler('record_update', self.handle_record_update)
+    
+    def remove(self, entity):
+        entity.unregister_handler('record_update', self.handle_record_update)
+        
+    def handle_record_update(self, entity, location_name, update_description):
+        entity.updates[location_name] = update_description
+        
+
 class FarmComponent(Component):
     
     def add(self, entity):
@@ -288,12 +301,13 @@ class FarmComponent(Component):
         entity.register_handler('day', self.handle_day)
         
     def remove(self, entity):
-        entity.remove_handler('day', self.handle_day)
+        entity.unregister_handler('day', self.handle_day)
         
-    def handle_day(self):
-        if humans:
-            human[0].energy -= 10
+    def handle_day(self, entity):
+        if entity.humans:
+            entity.human[0].energy -= 10
             game.get_game().entity_manager.get_by_name('camp').food += 10
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Farm', 'A tough day on the farm. Gained 10 food, but %s lost 10 energy.' % humans[0].name)
         
 
 def get_entities_in_front(entity):
