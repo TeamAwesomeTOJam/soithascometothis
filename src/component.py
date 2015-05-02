@@ -1,3 +1,5 @@
+from abc import ABCMeta, abstractmethod
+
 import pygame
 from math import *
 
@@ -7,6 +9,18 @@ from vec2d import Vec2d
 
 
 FACING = ['right', 'down', 'left', 'up']
+
+
+class Component:
+    __metaclass__ = ABCMeta
+    
+    @abstractmethod
+    def add(self):
+        pass
+    
+    @abstractmethod
+    def remove(self):
+        pass
 
 
 class ExampleComponent(object):
