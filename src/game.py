@@ -42,7 +42,7 @@ class Game(object):
         self.resource_manager.register_loader('sound', LoadSound)
 
         self.input_manager = InputManager()
-        self.view = View(pygame.display.get_surface(), [SimpleLayer('draw'), SimpleLayer('ui')])
+        self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), SimpleLayer('draw')])
         
     def run(self, mode):     
         self.entity_manager.add_entity(Entity('human'))

@@ -31,8 +31,6 @@ class ResourceManager(object):
         
 class EntityDataLoader(object):
     
-
-    
     def load(self, path):
         with open(path) as in_file:
             definition = json.load(in_file)

@@ -22,12 +22,8 @@ class View(object):
         self.layers.append(layer)
         
     def draw(self):
-#         self.surface.set_clip(self.area)
-        
         for layer in self.layers:
             layer.draw(self)
-            
-#         self.surface.set_clip(None)
 
 
 class StaticLayer(object):
@@ -83,8 +79,7 @@ class SolidBackgroundLayer(object):
         self.color = color
     
     def draw(self, view):
-        r = pygame.Rect(view.area)
-        pygame.draw.rect(view.surface, self.color, r)
+        view.surface.fill(self.color)
             
 
 class SimpleLayer(object):
