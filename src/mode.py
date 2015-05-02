@@ -190,7 +190,8 @@ class MorningMode(object):
         pass
     
     def handle_event(self, event):
-        pass
+        entity = game.get_game().entity_manager.get_by_name(event.target)
+        entity.handle('input', event)
     
     def update(self, dt):
         pass

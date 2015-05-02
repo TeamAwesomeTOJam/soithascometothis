@@ -73,6 +73,9 @@ class InputManager:
             else:
                 pass
         
+        event = InputEvent('mouse','MOUSE_POSITION',pygame.mouse.get_pos())
+        processed_events.append(event)
+        
         return processed_events
     
     def _new_event(self, device_id, control_type, control_id, value):

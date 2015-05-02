@@ -152,6 +152,20 @@ class PlayerCollisionComponent(object):
         if 'player' in other.tags and entity.chasing:
             if get_midpoint(entity).get_distance(get_midpoint(other)) < entity.width/2 + other.width/2:
                 game.get_game().change_mode(mode.BetweenRoundMode())
+                
+class MouseMovementComponent(object):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y'])
+        entity.register_handler('input', self.handle_input)
+    
+    def remove(self, entity):
+        entity.unregister_handler('intput', self.handle_input)
+        
+    def handle_input(self, entity, event):
+        if event.action == 'MOUSE_POSITION':
+            entity.x = event.value[0]
+            entity.y = event.value[1]
                     
         
 def verify_attrs(entity, attrs):

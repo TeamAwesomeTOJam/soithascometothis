@@ -9,7 +9,8 @@ from component import (AnimationComponent,
                        InputMovementComponent, 
                        DrawComponent, 
                        DrawHitBoxComponent,
-                       PlayerCollisionComponent)
+                       PlayerCollisionComponent,
+                       MouseMovementComponent)
 
 from graphicscomponents import DrawCircleComponent
 
@@ -82,6 +83,7 @@ class Game(object):
         self.component_manager.register_component(HideComponent())
         self.component_manager.register_component(AIActionComponent())
         self.component_manager.register_component(AIMovementComponent())
+        self.component_manager.register_component(MouseMovementComponent())
         
         self.entity_manager = EntityManager()
             
@@ -112,6 +114,7 @@ class Game(object):
         
         
         self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('mouse'))
         
         
 #         self.renderer.createBackground()
