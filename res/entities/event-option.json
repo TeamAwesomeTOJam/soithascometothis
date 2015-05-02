@@ -1,4 +1,4 @@
 {
-    "components" : ["EventOptionComponent"],
+    "components" : ["EventOptionComponent", "DrawHitBoxComponent", "DrawTextComponent"],
     "tags" : ["draw-ui"]
 }

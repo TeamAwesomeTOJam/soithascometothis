@@ -4,7 +4,7 @@
     "options" : [{
         "text" : "Frob the doodad.",
         "requirements" : {"energy" : 50},
-        "pass" : 2,
+        "pass_" : 2,
         "fail" : 3
     }]
 },

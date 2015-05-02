@@ -6,7 +6,7 @@ from entity import Entity
 class EventComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ["event"])
+        verify_attrs(entity, ['event', ('text', ''), 'x', 'y'])
         event = game.get_game().resource_manager.get('event', entity.event)
         entity.current_node = None
         entity.options = []
@@ -22,6 +22,8 @@ class EventComponent(Component):
                 entity.current_node = node
         
         if entity.current_node != None:
+            entity.text = entity.current_node.text
+            
             for option_entity in entity.options:
                 game.get_game().entity_manager.remove_entity(option_entity)
             
@@ -32,12 +34,16 @@ class EventComponent(Component):
                 game.get_game().entity_manager.add_entity(option_entity)
                 entity.options.append(option_entity)
 
+    def handle_draw(self, entity, surface):
+        pass
 
 class EventOptionComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ["option"])
+        verify_attrs(entity, ['option', ('text', entity.option.text)])
         
-    
     def remove(self, entity):
         pass
+    
+    def handle_activate(self):
+        entity.event.handle('change_node', entity.option.pass_)
