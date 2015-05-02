@@ -46,6 +46,7 @@ class Game(object):
         
     def run(self, mode):
         self.entity_manager.add_entity(Entity('camp'))
+        self.entity_manager.add_entity(Entity('report'))
         
         self.entity_manager.add_entity(Entity('human', name='Alice'))
         self.entity_manager.add_entity(Entity('human', name='Bob'))
