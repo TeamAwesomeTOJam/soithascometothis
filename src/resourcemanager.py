@@ -28,28 +28,6 @@ class ResourceManager(object):
     def clear(self):
         self.cache = {}
         
-        
-class EntityDataLoader(object):
-    
-    def load(self, path):
-        with open(path) as in_file:
-            definition = json.load(in_file)
-        
-        if 'includes' in definition:
-            flattened = {}
-            for include_path in definition['includes']:
-                include = game.get_game().resource_manager.get(include_path)
-                for field in include._fields:
-                    flattened[field] = getattr(include, field)
-            for key, value in definition.iteritems():
-                if key.endswith('+'):
-                    base_key = key[:-1]
-                    flattened[base_key] = flattened.get(base_key, tuple()) + tuple(value)
-                else:
-                    flattened[key] = value
-            definition = flattened
-        
-        return freezejson.freeze_value(definition)
     
 def LoadEntityData(prefix, key):
     with open(os.path.join(prefix, 'entities', key + '.json')) as in_file:
@@ -92,16 +70,36 @@ def LoadImage(prefix, key):
 
 def LoadInputMapping(prefix, key):
     with open(os.path.join(prefix, 'inputmaps', key + '.json')) as in_file:
-        definition = json.load(in_file)
+        mapping = json.load(in_file)
         
-    return definition
+    return mapping
 
 def LoadAnimation(prefix, key):
-    pass
+    with open(os.path.join(prefix, 'animations', key + '.json')) as in_file:
+        animation = json.load(in_file)
 
+    if 'frame_dir' in animation:
+        frame_dir = os.path.join(prefix, 'images', animation['frame_dir'])
+        frames = sorted(os.listdir(frame_dir))
+        animation['frames'] = []
+        for frame in frames:
+            animation['frames'].append(os.path.join(frame_dir, frame))
+                
+    return freezejson.freeze_value(animation)
+                    
 def LoadSound(prefix, key):
     return pygame.mixer.Sound(os.path.join(prefix, 'sounds', key))
 
+<<<<<<< Upstream, based on origin/master
 def LoadText(prefix, key):
     f = open(os.path.join(prefix, 'text', key),'r')
     return f.read()
+=======
+def LoadEvent(prefix, key):
+    with open(os.path.join(prefix, 'events', key + '.json')) as in_file:
+        event = json.load(in_file)
+    
+    # ???
+    
+    return freezejson.freeze_value(event)
+>>>>>>> b4f332f More work towards event stuff.
