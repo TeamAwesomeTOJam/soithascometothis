@@ -90,11 +90,10 @@ def LoadAnimation(prefix, key):
 def LoadSound(prefix, key):
     return pygame.mixer.Sound(os.path.join(prefix, 'sounds', key))
 
-<<<<<<< Upstream, based on origin/master
 def LoadText(prefix, key):
     f = open(os.path.join(prefix, 'text', key),'r')
     return f.read()
-=======
+
 def LoadEvent(prefix, key):
     with open(os.path.join(prefix, 'events', key + '.json')) as in_file:
         event = json.load(in_file)
@@ -102,4 +101,4 @@ def LoadEvent(prefix, key):
     # ???
     
     return freezejson.freeze_value(event)
->>>>>>> b4f332f More work towards event stuff.
+
