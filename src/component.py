@@ -290,7 +290,35 @@ class ResourceMeterMouseOverComponent(Component):
             
             surface.blit(s, r)
             
+class HumanMouseOverComponent(Component):
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', 'width', 'height'])
+        entity.register_handler('draw', self.handle_draw)
         
+    def remove(self, entity):
+        entity.remove_handler('draw', self.handle_draw)
+        
+    def handle_draw(self, entity, surface):
+        mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
+        if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
+            
+            pos = Vec2d(mouse_entity.x, mouse_entity.y)
+            
+            offset = 0
+            
+            for attr in ['health', 'hunger', 'thirst', 'energy', 'strength']:
+                amount = entity.__getattr__(attr)
+                
+                f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+                s = f.render(attr + ' ' + str(amount) + "/100", True, (255,255,0))
+                
+                r = s.get_rect()
+                r.midright = pos
+                r.move_ip(0,offset)
+                
+                offset += r.height+10
+                
+                surface.blit(s, r)
 
 def verify_attrs(entity, attrs):
     missing_attrs = []
