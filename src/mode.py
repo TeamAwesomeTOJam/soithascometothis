@@ -76,7 +76,9 @@ class MorningMode(Mode):
         pass
     
     def enter(self):
-        pass
+        humans = game.get_game().entity_manager.get_by_tag('human')
+        for h in humans:
+            h.handle('go_home')
     
     def leave(self):
         pass

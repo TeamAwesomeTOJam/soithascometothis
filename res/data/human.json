@@ -4,6 +4,9 @@
 	"width" : 20,
 	"height" : 80,
 	
+	"home_x" : 10,
+	"home_y" : 10,
+	
 	"health" : 100,
 	"hunger" : 0,
 	"thirst" : 0,
@@ -13,5 +16,6 @@
 	"tags" : ["draw","human"],
 	"components" : ["DrawHitBoxComponent",
 					"HumanPlacementComponent",
-					"HumanMouseOverComponent"]
+					"HumanMouseOverComponent",
+					"GoHomeComponent"]
 }

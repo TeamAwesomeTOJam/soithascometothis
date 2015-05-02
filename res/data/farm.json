@@ -2,7 +2,7 @@
     "name" : "The Farm",
 	"x" : 200,
 	"y" : 200,
-	"description" : "Uses 10 energy.\nProduces 10 Food",
+	"description" : "Farm\nUses 10 energy\nProduces 10 Food",
 	"components+" : ["FarmComponent"],
 	"includes" : ["camp-location"]
 

@@ -323,7 +323,7 @@ class ResourceMeterMouseOverComponent(Component):
             
 class HumanMouseOverComponent(Component):
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y', 'width', 'height'])
+        verify_attrs(entity, ['x', 'y', 'width', 'height', 'name'])
         entity.register_handler('draw', self.handle_draw)
         
     def remove(self, entity):
@@ -335,7 +335,14 @@ class HumanMouseOverComponent(Component):
             
             pos = Vec2d(mouse_entity.x, mouse_entity.y)
             
-            offset = 0
+            f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+            s = f.render(entity.name, True, (255,255,0))
+            
+            r = s.get_rect()
+            r.topright = pos
+            offset = r.height+10
+            
+            surface.blit(s, r)
             
             for attr in ['health', 'hunger', 'thirst', 'energy', 'strength']:
                 amount = getattr(entity, attr)
@@ -375,6 +382,19 @@ class CampLocationMouseOverComponent(Component):
                 offset += r.height+10
                 
                 surface.blit(s, r)
+
+class GoHomeComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', 'home_x', 'home_y'])
+        entity.register_handler('go_home', self.handle_go_home)
+        
+    def remove (self, entity):
+        entity.remove_handler('go_home', self.handle_go_home)
+        
+    def handle_go_home(self, entity):
+        entity.x = entity.home_x
+        entity.y = entity.home_y
 
 def verify_attrs(entity, attrs):
     missing_attrs = []

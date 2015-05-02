@@ -8,6 +8,7 @@ from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInpu
 from entity import Entity
 from render import View, BackgroundLayer, SimpleLayer, SolidBackgroundLayer
 from input import InputManager
+from vec2d import Vec2d
 
 
 _game = None
@@ -50,11 +51,17 @@ class Game(object):
         self.entity_manager.add_entity(Entity('camp'))
         self.entity_manager.add_entity(Entity('report'))
         
-        self.entity_manager.add_entity(Entity('human', name='Alice'))
-        self.entity_manager.add_entity(Entity('human', name='Bob'))
-        self.entity_manager.add_entity(Entity('human', name='Chris'))
-        self.entity_manager.add_entity(Entity('human', name='Doris'))
-        self.entity_manager.add_entity(Entity('human', name='Esther'))
+        origin = Vec2d(600, 200)
+        num_humans = 6
+        for i in range(num_humans):
+            pos = Vec2d(100,0).rotated(360.0*i/(num_humans)) + origin
+            self.entity_manager.add_entity(Entity('human', name='name', home_x = pos.x, home_y = pos.y))
+        
+#         self.entity_manager.add_entity(Entity('human', name='Alice'))
+#         self.entity_manager.add_entity(Entity('human', name='Bob'))
+#         self.entity_manager.add_entity(Entity('human', name='Chris'))
+#         self.entity_manager.add_entity(Entity('human', name='Doris'))
+#         self.entity_manager.add_entity(Entity('human', name='Esther'))
         
         self.entity_manager.add_entity(Entity('mouse'))
         
@@ -64,6 +71,8 @@ class Game(object):
         
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
         self.entity_manager.add_entity(Entity('button'))
+
+        self.entity_manager.commit_changes()
 
         self.change_mode(mode)
         self.running = True
