@@ -219,6 +219,9 @@ class HumanPlacementComponent(Component):
         for location in locations:
             location.handle('human_placed', entity)
             break # Just send the event to the first location in the set
+        if not locations:
+            entity.x = entity.home_x
+            entity.y = entity.home_y
 
 
 class AdvanceTurnComponent(Component):
