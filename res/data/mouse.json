@@ -2,8 +2,8 @@
 	"name" : "mouse",
 	"x" : 0,
 	"y" : 0,
-	"width" : 2,
-	"height" : 2,
+	"width" : 1,
+	"height" : 1,
 	"grab_range" : 100,
 	"components" : ["DrawHitBoxComponent","MouseMovementComponent","HumanGrabberComponent"],
 	"tags" : ["update"]

@@ -1,0 +1,12 @@
+{
+
+	"x" : 500,
+	"y" : 500,
+
+	"description" : "Food",
+	"tracking_entity" : "camp",
+	"tracking_resource" : "food",
+
+	"includes" : ["resource-meter-ui"]
+
+}

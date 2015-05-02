@@ -200,8 +200,9 @@ class HumanGrabberComponent(Component):
                     entity.grabbed_human = closest
                     closest.handle('grabbed', entity)
             elif event.value == 0:
-                entity.grabbed_human.handle('released', entity)
-                entity.grabbed_human = None
+                if entity.grabbed_human:
+                    entity.grabbed_human.handle('released', entity)
+                    entity.grabbed_human = None
     
     def handle_update(self, entity, dt):
         if entity.grabbed_human:
@@ -241,6 +242,28 @@ class HumanAcceptor(Component):
         
     def handle_human_placed(self, entity, human):
         entity.humans.append(human)
+
+class ResourceMeterUIComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', 'width', 'height', 'description', 'tracking_entity', 'tracking_resource','background_colour', 'colour'])
+        entity.register_handler("draw", self.handle_draw)
+        
+    def remove(self, entity):
+        entity.remove_handler("draw", self.handle_draw)
+        
+    def handle_draw(self, entity, surface):
+        fill = game.get_game().entity_manager.get_by_name(entity.tracking_entity).__getattr__(entity.tracking_resource)/100.0
+        r = pygame.Rect(entity.x, entity.y, entity.width, entity.height)
+        fill_r = r.inflate(-5, -5)
+        old_bottom = fill_r.bottom
+        fill_r.h *= fill
+        fill_r.bottom = old_bottom
+        
+        pygame.draw.rect(surface, entity.background_colour, r)
+        pygame.draw.rect(surface, entity.colour, fill_r)
+        
+        
     
 
 def verify_attrs(entity, attrs):

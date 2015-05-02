@@ -1,0 +1,15 @@
+{
+
+	"x" : 0,
+	"y" : 0,
+	"width" : 20,
+	"height" : 100,
+	"description" : "",
+	"tracking_entity" : "",
+	"tracking_resource" : "",
+	"background_colour" : [255,0,0],
+	"colour" : [0,255,0],
+
+	"components" : ["ResourceMeterUIComponent"],
+	"tags" : ["draw"]
+}

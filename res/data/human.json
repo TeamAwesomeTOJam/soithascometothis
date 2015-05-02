@@ -3,10 +3,13 @@
 	"y" : 10,
 	"width" : 20,
 	"height" : 80,
+	
 	"health" : 100,
 	"hunger" : 0,
 	"thirst" : 0,
 	"energy" : 100,
+	"strength" : 100,
+	
 	"tags" : ["draw","human"],
 	"components" : ["DrawHitBoxComponent", "HumanPlacementComponent"]
 }
