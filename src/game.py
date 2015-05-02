@@ -3,6 +3,7 @@ import pygame
 import random
 
 import component
+import event
 import componentmanager
 import entity
 from entitymanager import EntityManager
