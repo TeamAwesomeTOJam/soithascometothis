@@ -233,7 +233,7 @@ class HumanPlacementComponent(Component):
 class HumanAcceptor(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['humans'])
+        verify_attrs(entity, [('humans', [])])
         entity.register_handler('human_placed', self.handle_human_placed)
     
     def remove(self, entity):

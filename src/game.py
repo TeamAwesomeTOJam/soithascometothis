@@ -50,7 +50,10 @@ class Game(object):
         self.entity_manager.add_entity(Entity('human'))
         self.entity_manager.add_entity(Entity('human'))
         self.entity_manager.add_entity(Entity('human'))
+        
         self.entity_manager.add_entity(Entity('mouse'))
+        
+        self.entity_manager.add_entity(Entity('farm'))
 
         self.change_mode(mode)
         self.running = True
