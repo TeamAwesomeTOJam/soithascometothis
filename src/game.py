@@ -23,7 +23,7 @@ class Game(object):
         self.running = False
         self.screen_size = screen_size
         
-        pygame.mixer.pre_init(frequency=44100)
+        pygame.mixer.pre_init(frequency=48000)
         pygame.init()
         pygame.display.set_caption("It's All Come to This")
                                    
@@ -42,10 +42,6 @@ class Game(object):
         self.resource_manager.register_loader('sound', LoadSound)
 
         self.input_manager = InputManager()
-        
-#         self.renderer = GLRenderer()
-#         self.renderer.resize(self.screen_size)
-       
         self.view = View(pygame.display.get_surface(), [SimpleLayer('draw'), SimpleLayer('ui')])
         
     def run(self, mode):     
