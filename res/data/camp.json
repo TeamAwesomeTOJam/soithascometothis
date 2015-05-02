@@ -1,7 +1,5 @@
 {
-
 	"name" : "camp",
-
 	"defense" : 100,
 	"shelter" : 100,
 	"food" : 75,

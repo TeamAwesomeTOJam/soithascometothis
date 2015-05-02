@@ -228,13 +228,13 @@ class HumanPlacementComponent(Component):
         locations = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))
         for location in locations:
             location.handle('human_placed', entity)
-            break # Just send the even to the first location in the set
+            break # Just send the event to the first location in the set
 
 
 class HumanAcceptor(Component):
     
     def add(self, entity):
-        verify_attrs(entity, [('humans', []), 'human_x', 'human_y'])
+        verify_attrs(entity, [('humans', []), 'x', 'y', 'human_x', 'human_y'])
         entity.register_handler('human_placed', self.handle_human_placed)
     
     def remove(self, entity):
@@ -242,6 +242,8 @@ class HumanAcceptor(Component):
         
     def handle_human_placed(self, entity, human):
         entity.humans.append(human)
+        human.x = entity.human_x + entity.x
+        human.y = entity.human_y + entity.y
 
 class ResourceMeterUIComponent(Component):
     
@@ -263,7 +265,6 @@ class ResourceMeterUIComponent(Component):
         pygame.draw.rect(surface, entity.background_colour, r)
         pygame.draw.rect(surface, entity.colour, fill_r)
         
-        
     
 
 def verify_attrs(entity, attrs):
@@ -278,7 +279,22 @@ def verify_attrs(entity, attrs):
                 missing_attrs.append(attr)
     if len(missing_attrs) > 0:
         raise AttributeError("entity [%s] is missing required attributes [%s]" % (entity._static_data_name, missing_attrs))
-            
+
+
+class FarmComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, [('humans', [])])
+        entity.register_handler('day', self.handle_day)
+        
+    def remove(self, entity):
+        entity.remove_handler('day', self.handle_day)
+        
+    def handle_day(self):
+        if humans:
+            human[0].energy -= 10
+            game.get_game().entity_manager.get_by_name('camp').food += 10
+        
 
 def get_entities_in_front(entity):
     COLLIDE_BOX_WIDTH = 100
