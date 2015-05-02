@@ -257,7 +257,22 @@ def verify_attrs(entity, attrs):
                 missing_attrs.append(attr)
     if len(missing_attrs) > 0:
         raise AttributeError("entity [%s] is missing required attributes [%s]" % (entity._static_data_name, missing_attrs))
-            
+
+
+class FarmComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, [('humans', [])])
+        entity.register_handler('day', self.handle_day)
+        
+    def remove(self, entity):
+        entity.remove_handler('day', self.handle_day)
+        
+    def handle_day(self):
+        if humans:
+            human[0].energy -= 10
+            game.get_game().entity_manager.get_by_name('camp').food += 10
+        
 
 def get_entities_in_front(entity):
     COLLIDE_BOX_WIDTH = 100

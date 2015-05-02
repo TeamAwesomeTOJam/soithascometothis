@@ -1,6 +1,7 @@
 {
 	"x" : 200,
 	"y" : 200,
+	"components+" : ["FarmComponent"],
 	"includes" : ["camp-location"]
 
 }
