@@ -12,5 +12,5 @@
 
 	"components" : ["ResourceMeterUIComponent",
 					"ResourceMeterMouseOverComponent"],
-	"tags" : ["draw", "mouse_over"]
+	"tags" : ["draw-ui", "mouse_over"]
 }

@@ -13,7 +13,6 @@ class ComponentManager(object):
         for name, value in module.__dict__.iteritems():
             try:
                 if issubclass(value, Component):
-                    print name, value
                     self.components[name] = value()
             except:
                 pass
