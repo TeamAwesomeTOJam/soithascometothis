@@ -23,18 +23,6 @@ class Component:
         pass
 
 
-class ExampleComponent(Component):
-    
-    def add(self, entity):
-        entity.register_handler('update', self.handle_update)
-
-    def remove(self, entity):
-        entity.unregister_handler('update', self.handle_update)
-    
-    def handle_update(self, entity, dt):
-        print '%f seconds have elapsed!' % (dt,)
-
-
 class AnimationComponent(Component):
     
     def add(self, entity):
@@ -230,6 +218,31 @@ class HumanPlacementComponent(Component):
             location.handle('human_placed', entity)
             break # Just send the event to the first location in the set
 
+
+class UIActivatorComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', ('activating_element', None)])
+        entity.register_handler('input', self.handle_input)
+    
+    def remove(self, entity):
+        entity.unregister_handler('input', self.handle_input)
+    
+    def _get_element_under_cursor(self, entity):
+        ui = game.get_game().entity_manager.get_in_area('ui', (entity.x, entity.y, 1, 1))
+        for element in ui:
+            return element
+    
+    def handle_input(self, entity, event):
+        if event.action == 'CLICK':
+            if event.value == 1:
+                element = self._get_element_under_cursor(entity)
+                entity.activating_element = element
+            elif event.value == 0:
+                element = self._get_element_under_cursor(entity)
+                if element != None and entity.activating_element == element:
+                    element.handle('activate')
+    
 
 class HumanAcceptor(Component):
     

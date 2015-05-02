@@ -42,7 +42,9 @@ class Game(object):
         self.resource_manager.register_loader('sound', LoadSound)
 
         self.input_manager = InputManager()
-        self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), SimpleLayer('draw')])
+        self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), 
+                                                        SimpleLayer('draw'), 
+                                                        SimpleLayer('draw-ui')])
         
     def run(self, mode):
         self.entity_manager.add_entity(Entity('camp'))
@@ -61,6 +63,7 @@ class Game(object):
         self.entity_manager.add_entity(Entity("camp"))
         
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
+        self.entity_manager.add_entity(Entity('button'))
 
         self.change_mode(mode)
         self.running = True
@@ -89,6 +92,7 @@ class Game(object):
             pygame.display.flip()
             
     def change_mode(self, new_mode):
+        print self.mode, '->', new_mode
         if self.mode:
             self.mode.leave()
         self.mode = new_mode

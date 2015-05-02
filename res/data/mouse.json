@@ -5,6 +5,6 @@
 	"width" : 1,
 	"height" : 1,
 	"grab_range" : 100,
-	"components" : ["DrawHitBoxComponent","MouseMovementComponent","HumanGrabberComponent"],
+	"components" : ["DrawHitBoxComponent","MouseMovementComponent","HumanGrabberComponent","UIActivatorComponent"],
 	"tags" : ["update"]
 }

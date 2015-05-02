@@ -1,4 +1,5 @@
 {
+    "name" : "The Farm",
 	"x" : 200,
 	"y" : 200,
 	"components+" : ["FarmComponent"],
