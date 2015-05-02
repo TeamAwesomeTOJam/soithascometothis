@@ -91,3 +91,33 @@ class MorningMode(Mode):
     
     def draw(self):
         game.get_game().view.draw()
+        
+
+class DayMode(Mode):
+    
+    def __init__(self):
+        self.time_elapsed = 0
+        self.ttl = 10
+    
+    def enter(self):
+        self.time_elapsed = 0
+    
+    def leave(self):
+        for location in game.get_game().entity_manager.get_by_tag('location'):
+            location.handle('day')
+    
+    def update(self, dt):
+        for entity in game.get_game().entity_manager.get_by_tag('update'):
+            entity.handle('update', dt)
+        
+        self.time_elapsed += dt
+        if self.time_elapsed > self.ttl:
+            game.get_game().change_mode(NightMode())
+    
+    def draw(self):
+        game.get_game().view.draw()
+        
+        
+class NightMode(Mode):
+    
+    pass
