@@ -224,8 +224,10 @@ class HumanPlacementComponent(Component):
         pass
     
     def handle_released(self, entity, releaser):
-        location = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))[0]
-        location.handle('human_placed', entity)
+        locations = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))
+        for location in locations:
+            location.handle('human_placed', entity)
+            break # Just send the even to the first location in the set
 
 
 class HumanAcceptor(Component):
