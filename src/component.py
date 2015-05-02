@@ -227,13 +227,13 @@ class HumanPlacementComponent(Component):
         locations = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))
         for location in locations:
             location.handle('human_placed', entity)
-            break # Just send the even to the first location in the set
+            break # Just send the event to the first location in the set
 
 
 class HumanAcceptor(Component):
     
     def add(self, entity):
-        verify_attrs(entity, [('humans', []), 'human_x', 'human_y'])
+        verify_attrs(entity, [('humans', []), 'x', 'y', 'human_x', 'human_y'])
         entity.register_handler('human_placed', self.handle_human_placed)
     
     def remove(self, entity):
@@ -241,6 +241,8 @@ class HumanAcceptor(Component):
         
     def handle_human_placed(self, entity, human):
         entity.humans.append(human)
+        human.x = entity.human_x + entity.x
+        human.y = entity.human_y + entity.y
     
 
 def verify_attrs(entity, attrs):
