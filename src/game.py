@@ -50,10 +50,10 @@ class Game(object):
         
         pygame.mixer.pre_init(frequency=44100)
         pygame.init()
-        pygame.display.set_caption('After You!')
+        pygame.display.set_caption("It's All Come to This")
                                    
         self.clock = pygame.time.Clock()
-        self.screen = pygame.display.set_mode(self.screen_size, pygame.OPENGL | pygame.DOUBLEBUF | pygame.HWSURFACE)
+        self.screen = pygame.display.set_mode(self.screen_size, pygame.DOUBLEBUF | pygame.HWSURFACE)
         
         self.component_manager = componentmanager.ComponentManager()
         self.component_manager.register_component(MovementComponent())
@@ -93,25 +93,28 @@ class Game(object):
 
         self.input_manager = InputManager()
         
-        self.renderer = GLRenderer()
-        self.renderer.resize(self.screen_size)
+#         self.renderer = GLRenderer()
+#         self.renderer.resize(self.screen_size)
        
-        self.view = View([SimpleLayer('draw'), SimpleLayer('ui')])
+        self.view = View(pygame.display.get_surface(), [SimpleLayer('draw'), SimpleLayer('ui')])
         
     def run(self, mode):
-        p1 = Entity("player1")
-        p2 = Entity("player2")
-        self.entity_manager.add_entity(p1)
-        self.entity_manager.add_entity(p2)
-        self.entity_manager.add_entity(Entity("scoreui-player1"))
-        self.entity_manager.add_entity(Entity("scoreui-player2"))
-        self.entity_manager.add_entity(Entity("actionui-player1"))
-        self.entity_manager.add_entity(Entity("actionui-player2"))
-        self.entity_manager.add_entity(Entity("timerui"))
+#         p1 = Entity("player1")
+#         p2 = Entity("player2")
+#         self.entity_manager.add_entity(p1)
+#         self.entity_manager.add_entity(p2)
+#         self.entity_manager.add_entity(Entity("scoreui-player1"))
+#         self.entity_manager.add_entity(Entity("scoreui-player2"))
+#         self.entity_manager.add_entity(Entity("actionui-player1"))
+#         self.entity_manager.add_entity(Entity("actionui-player2"))
+#         self.entity_manager.add_entity(Entity("timerui"))
         
         
         
-        self.renderer.createBackground()
+        self.entity_manager.add_entity(Entity('human'))
+        
+        
+#         self.renderer.createBackground()
 
         self.change_mode(mode)
         self.running = True

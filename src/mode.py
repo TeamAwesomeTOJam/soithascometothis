@@ -177,3 +177,23 @@ class GameEndMode(object):
             game.get_game().renderer.render_game_end()
         else:
             game.get_game().renderer.render_game_end()  
+
+class MorningMode(object):
+    
+    def __init__(self):
+        pass
+    
+    def enter(self):
+        pass
+    
+    def leave(self):
+        pass
+    
+    def handle_event(self, event):
+        pass
+    
+    def update(self, dt):
+        pass
+    
+    def draw(self):
+        game.get_game().view.draw()

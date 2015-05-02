@@ -7,4 +7,4 @@ import mode
 
 
 g = game.Game((1280, 720), os.path.join(sys.path[0], 'res'))
-g.run(mode.AttractMode())
+g.run(mode.MorningMode())

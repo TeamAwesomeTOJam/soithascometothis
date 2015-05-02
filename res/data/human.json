@@ -1,11 +1,12 @@
 {
-	"x" : 0,
-	"y" : 0,
-	"width" : 0,
-	"height" : 0,
+	"x" : 10,
+	"y" : 10,
+	"width" : 20,
+	"height" : 80,
 	"health" : 100,
 	"hunger" : 0,
 	"thirst" : 0,
 	"energy" : 100,
-	"tags" : ["draw"]
+	"tags" : ["draw"],
+	"components" : ["DrawHitBoxComponent"]
 }

@@ -29,8 +29,8 @@ class InputManager:
             if e.type == pygame.QUIT:
                 processed_events.append(InputEvent('GAME', 'QUIT', 1))
             
-            elif e.type == pygame.VIDEORESIZE:
-                game.get_game().renderer.resize(e.dict['size'])
+#             elif e.type == pygame.VIDEORESIZE:
+#                 game.get_game().renderer.resize(e.dict['size'])
 
 
             elif e.type == pygame.JOYAXISMOTION:
@@ -62,6 +62,14 @@ class InputManager:
                     processed_events.append(event)
             elif e.type == pygame.JOYHATMOTION:
                 pass # TODO: this is going to get complicated
+            elif e.type == pygame.MOUSEBUTTONDOWN:
+                event = self._new_event(None, 'MOUSE', e.button, 1)
+                if event != None:
+                    processed_events.append(event)
+            elif e.type == pygame.MOUSEBUTTONUP:
+                event = self._new_event(None, 'MOUSE', e.button, 0)
+                if event != None:
+                    processed_events.append(event)
             else:
                 pass
         

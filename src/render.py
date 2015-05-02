@@ -8,9 +8,10 @@ class Render(object):
 
 class View(object):
     
-    def __init__(self, layers=None, entity_name=None):
+    def __init__(self, surface, layers=None, entity_name=None):
         self.layers = layers if layers != None else []
         self.entity_name = entity_name
+        self.surface = surface
     
     @property
     def entity(self):
@@ -93,4 +94,4 @@ class SimpleLayer(object):
         
     def draw(self, view):        
         for entity in game.get_game().entity_manager.get_by_tag(self.tag):
-            entity.handle('draw')
+            entity.handle('draw', view.surface)
