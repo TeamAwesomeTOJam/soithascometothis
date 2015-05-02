@@ -1,11 +1,11 @@
 {
 
-	"x" : 530,
+	"x" : 620,
 	"y" : 500,
 
-	"description" : "Food",
+	"description" : "Medical Supplies",
 	"tracking_entity" : "camp",
-	"tracking_resource" : "food",
+	"tracking_resource" : "medicine",
 
 	"includes" : ["resource-meter-ui"]
 

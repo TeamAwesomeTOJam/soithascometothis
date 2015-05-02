@@ -69,6 +69,10 @@ class Game(object):
         self.entity_manager.add_entity(Entity("camp"))
         
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
+        self.entity_manager.add_entity(Entity('camp-defense-meter-ui'))
+        self.entity_manager.add_entity(Entity('camp-shelter-meter-ui'))
+        self.entity_manager.add_entity(Entity('camp-water-meter-ui'))
+        self.entity_manager.add_entity(Entity('camp-medicine-meter-ui'))
         self.entity_manager.add_entity(Entity('button'))
 
         self.entity_manager.commit_changes()

@@ -1,11 +1,11 @@
 {
 
-	"x" : 530,
+	"x" : 590,
 	"y" : 500,
 
-	"description" : "Food",
+	"description" : "Water",
 	"tracking_entity" : "camp",
-	"tracking_resource" : "food",
+	"tracking_resource" : "water",
 
 	"includes" : ["resource-meter-ui"]
 
