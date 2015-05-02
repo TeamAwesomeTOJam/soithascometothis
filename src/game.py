@@ -1,10 +1,11 @@
 import sys
 import pygame
+import random
 
 import component
 import componentmanager
 from entitymanager import EntityManager
-from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInputMapping, LoadSound
+from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInputMapping, LoadSound, LoadText
 from entity import Entity
 from render import View, BackgroundLayer, SimpleLayer, SolidBackgroundLayer
 from input import InputManager
@@ -41,6 +42,7 @@ class Game(object):
         self.resource_manager.register_loader('image', LoadImage)
         self.resource_manager.register_loader('inputmap', LoadInputMapping)
         self.resource_manager.register_loader('sound', LoadSound)
+        self.resource_manager.register_loader('text', LoadText)
 
         self.input_manager = InputManager()
         self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), 
@@ -53,15 +55,12 @@ class Game(object):
         
         origin = Vec2d(600, 200)
         num_humans = 6
+        
+        names = self.resource_manager.get('text','names.txt').split('\n')
+        
         for i in range(num_humans):
             pos = Vec2d(100,0).rotated(360.0*i/(num_humans)) + origin
-            self.entity_manager.add_entity(Entity('human', name='name', home_x = pos.x, home_y = pos.y))
-        
-#         self.entity_manager.add_entity(Entity('human', name='Alice'))
-#         self.entity_manager.add_entity(Entity('human', name='Bob'))
-#         self.entity_manager.add_entity(Entity('human', name='Chris'))
-#         self.entity_manager.add_entity(Entity('human', name='Doris'))
-#         self.entity_manager.add_entity(Entity('human', name='Esther'))
+            self.entity_manager.add_entity(Entity('human', name=random.choice(names), home_x = pos.x, home_y = pos.y))
         
         self.entity_manager.add_entity(Entity('mouse'))
         

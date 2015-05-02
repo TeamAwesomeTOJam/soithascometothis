@@ -101,3 +101,7 @@ def LoadAnimation(prefix, key):
 
 def LoadSound(prefix, key):
     return pygame.mixer.Sound(os.path.join(prefix, 'sounds', key))
+
+def LoadText(prefix, key):
+    f = open(os.path.join(prefix, 'text', key),'r')
+    return f.read()
