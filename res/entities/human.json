@@ -11,5 +11,7 @@
 	"strength" : 100,
 	
 	"tags" : ["draw","human"],
-	"components" : ["DrawHitBoxComponent", "HumanPlacementComponent"]
+	"components" : ["DrawHitBoxComponent",
+					"HumanPlacementComponent",
+					"HumanMouseOverComponent"]
 }

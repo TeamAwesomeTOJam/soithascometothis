@@ -5,6 +5,9 @@
 	"height" : 100,
 	"human_x" : 10,
 	"human_y" : 10,
+	"description" : "",
 	"tags" : ["location", "draw"],
-	"components" : ["HumanAcceptor", "DrawHitBoxComponent"]
+	"components" : ["HumanAcceptor",
+					"DrawHitBoxComponent",
+					"CampLocationMouseOverComponent"]
 }
