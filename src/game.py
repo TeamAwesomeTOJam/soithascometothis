@@ -1,39 +1,13 @@
 import sys
 import pygame
+
+import component
 import componentmanager
 from entitymanager import EntityManager
 from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInputMapping, LoadSound
-from component import (AnimationComponent,
-                       MovementComponent,
-                       ExampleComponent, 
-                       InputMovementComponent, 
-                       DrawComponent, 
-                       DrawHitBoxComponent,
-                       PlayerCollisionComponent,
-                       MouseMovementComponent)
-
-from graphicscomponents import DrawCircleComponent
-
-from aiplayercomponents import AIActionComponent, AIMovementComponent
-
-from gamecomponents import (SmokeScreenComponent,
-                            DecoyMovementComponent,
-                            SelfDestructComponent,
-                            SpawnDecoyComponent,
-                            MinefieldComponent,
-                            SpeedBoostComponent,
-                            ButtonInterpreterComponent,
-                            TrapComponent,
-                            HideComponent)
-
-from uicomponents import DrawScoreComponent, DrawTimerComponent, UpdateTimerComponent, DrawActionsComponent
-
-from vortexcomponents import DrawVortextComponent, GrowVortextComponent, SpawnVortexComponent
 from entity import Entity
-
 from render import View, BackgroundLayer, SimpleLayer, SolidBackgroundLayer
 from input import InputManager
-from opengl import GLRenderer
 
 
 _game = None
@@ -49,7 +23,7 @@ class Game(object):
         self.running = False
         self.screen_size = screen_size
         
-        pygame.mixer.pre_init(frequency=44100)
+        pygame.mixer.pre_init(frequency=48000)
         pygame.init()
         pygame.display.set_caption("It's All Come to This")
                                    
@@ -57,33 +31,7 @@ class Game(object):
         self.screen = pygame.display.set_mode(self.screen_size, pygame.DOUBLEBUF | pygame.HWSURFACE)
         
         self.component_manager = componentmanager.ComponentManager()
-        self.component_manager.register_component(MovementComponent())
-        self.component_manager.register_component(ExampleComponent())
-        self.component_manager.register_component(AnimationComponent())
-        self.component_manager.register_component(DrawComponent())
-        self.component_manager.register_component(InputMovementComponent())
-        self.component_manager.register_component(DrawHitBoxComponent()) 
-        self.component_manager.register_component(DrawCircleComponent())
-        self.component_manager.register_component(SmokeScreenComponent())
-        self.component_manager.register_component(PlayerCollisionComponent())
-        self.component_manager.register_component(DecoyMovementComponent())
-        self.component_manager.register_component(SelfDestructComponent())
-        self.component_manager.register_component(SpawnDecoyComponent())
-        self.component_manager.register_component(DrawScoreComponent())
-        self.component_manager.register_component(MinefieldComponent())
-        self.component_manager.register_component(DrawTimerComponent())
-        self.component_manager.register_component(UpdateTimerComponent())
-        self.component_manager.register_component(SpeedBoostComponent())
-        self.component_manager.register_component(ButtonInterpreterComponent())
-        self.component_manager.register_component(DrawActionsComponent())
-        self.component_manager.register_component(SpawnVortexComponent())
-        self.component_manager.register_component(DrawVortextComponent())
-        self.component_manager.register_component(GrowVortextComponent())
-        self.component_manager.register_component(TrapComponent())
-        self.component_manager.register_component(HideComponent())
-        self.component_manager.register_component(AIActionComponent())
-        self.component_manager.register_component(AIMovementComponent())
-        self.component_manager.register_component(MouseMovementComponent())
+        self.component_manager.register_module(component)
         
         self.entity_manager = EntityManager()
             
@@ -94,30 +42,11 @@ class Game(object):
         self.resource_manager.register_loader('sound', LoadSound)
 
         self.input_manager = InputManager()
-        
-#         self.renderer = GLRenderer()
-#         self.renderer.resize(self.screen_size)
-       
         self.view = View(pygame.display.get_surface(), [SimpleLayer('draw'), SimpleLayer('ui')])
         
-    def run(self, mode):
-#         p1 = Entity("player1")
-#         p2 = Entity("player2")
-#         self.entity_manager.add_entity(p1)
-#         self.entity_manager.add_entity(p2)
-#         self.entity_manager.add_entity(Entity("scoreui-player1"))
-#         self.entity_manager.add_entity(Entity("scoreui-player2"))
-#         self.entity_manager.add_entity(Entity("actionui-player1"))
-#         self.entity_manager.add_entity(Entity("actionui-player2"))
-#         self.entity_manager.add_entity(Entity("timerui"))
-        
-        
-        
+    def run(self, mode):     
         self.entity_manager.add_entity(Entity('human'))
         self.entity_manager.add_entity(Entity('mouse'))
-        
-        
-#         self.renderer.createBackground()
 
         self.change_mode(mode)
         self.running = True

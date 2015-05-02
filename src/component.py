@@ -23,7 +23,7 @@ class Component:
         pass
 
 
-class ExampleComponent(object):
+class ExampleComponent(Component):
     
     def add(self, entity):
         entity.register_handler('update', self.handle_update)
@@ -35,7 +35,7 @@ class ExampleComponent(object):
         print '%f seconds have elapsed!' % (dt,)
 
 
-class AnimationComponent(object):
+class AnimationComponent(Component):
     
     def add(self, entity):
         entity.register_handler('update', self.on_update)
@@ -73,7 +73,7 @@ class AnimationComponent(object):
             entity.animation_pos = 0
 
 
-class MovementComponent(object):
+class MovementComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', 'width', 'height', ('last_good_x', entity.x), ('last_good_y', entity.y), 'speed'])
@@ -99,7 +99,7 @@ class MovementComponent(object):
             entity.handle('collision', collided_entity)
 
 
-class InputMovementComponent(object):
+class InputMovementComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, [('dx', 0), ('dy', 0)])
@@ -125,7 +125,7 @@ class InputMovementComponent(object):
             entity.facing = int(((direction.get_angle() + 45) % 360) / 90)          
 
 
-class DrawComponent(object):
+class DrawComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, [('image_x', 0), ('image_y', 0), 'x', 'y'])
@@ -139,7 +139,7 @@ class DrawComponent(object):
         surface.blit(game.get_game().resource_manager.get('sprite', entity.image), transform(entity.x + entity.image_x, entity.y + entity.image_y))
 
 
-class DrawHitBoxComponent(object):
+class DrawHitBoxComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', 'width', 'height'])
@@ -153,7 +153,7 @@ class DrawHitBoxComponent(object):
         pygame.draw.rect(surface, (255, 0, 255), (entity.x, entity.y, entity.width, entity.height))
 
 
-class PlayerCollisionComponent(object):
+class PlayerCollisionComponent(Component):
     
     def add(self, entity):
         verify_attrs(entity, ['x', 'y', ('score', 0), ('chasing', False)])
