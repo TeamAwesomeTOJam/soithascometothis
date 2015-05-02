@@ -284,7 +284,7 @@ class ResourceMeterUIComponent(Component):
         entity.remove_handler("draw", self.handle_draw)
         
     def handle_draw(self, entity, surface):
-        fill = game.get_game().entity_manager.get_by_name(entity.tracking_entity).__getattr__(entity.tracking_resource)/100.0
+        fill = getattr(game.get_game().entity_manager.get_by_name(entity.tracking_entity), entity.tracking_resource)/100.0
         r = pygame.Rect(entity.x, entity.y, entity.width, entity.height)
         fill_r = r.inflate(-5, -5)
         old_bottom = fill_r.bottom
