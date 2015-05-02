@@ -265,7 +265,32 @@ class ResourceMeterUIComponent(Component):
         pygame.draw.rect(surface, entity.background_colour, r)
         pygame.draw.rect(surface, entity.colour, fill_r)
         
+
+class ResourceMeterMouseOverComponent(Component):
     
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y', 'width', 'height', 'description', 'tracking_entity', 'tracking_resource'])
+        entity.register_handler('draw', self.handle_draw)
+        
+    def remove(self, entity):
+        entity.remove_handler('draw', self.handle_draw)
+        
+    def handle_draw(self, entity, surface):
+        mouse_entity = game.get_game().entity_manager.get_by_name('mouse')
+        if get_box(entity).collidepoint(mouse_entity.x, mouse_entity.y):
+            
+            pos = Vec2d(mouse_entity.x, mouse_entity.y)
+            amount = game.get_game().entity_manager.get_by_name(entity.tracking_entity).__getattr__(entity.tracking_resource)
+            
+            f = pygame.font.SysFont(pygame.font.get_default_font(), 30)
+            s = f.render(entity.description + ' ' + str(amount) + "/100", True, (255,255,0))
+            
+            r = s.get_rect()
+            r.bottomright = pos
+            
+            surface.blit(s, r)
+            
+        
 
 def verify_attrs(entity, attrs):
     missing_attrs = []
@@ -333,3 +358,6 @@ def get_box_in_front(entity, width, height):
 
 def get_midpoint(entity):
     return Vec2d(entity.x + (entity.width/2), entity.y + (entity.height/2))
+
+def get_box(entity):
+    return pygame.Rect(entity.x, entity.y, entity.width, entity.height)

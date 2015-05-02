@@ -10,6 +10,7 @@
 	"background_colour" : [255,0,0],
 	"colour" : [0,255,0],
 
-	"components" : ["ResourceMeterUIComponent"],
-	"tags" : ["draw"]
+	"components" : ["ResourceMeterUIComponent",
+					"ResourceMeterMouseOverComponent"],
+	"tags" : ["draw", "mouse_over"]
 }
