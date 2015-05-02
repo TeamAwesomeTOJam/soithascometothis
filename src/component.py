@@ -15,11 +15,11 @@ class Component:
     __metaclass__ = ABCMeta
     
     @abstractmethod
-    def add(self):
+    def add(self, entity):
         pass
     
     @abstractmethod
-    def remove(self):
+    def remove(self, entity):
         pass
 
 
@@ -152,20 +152,6 @@ class DrawHitBoxComponent(Component):
     def handle_draw(self, entity, surface):
         pygame.draw.rect(surface, (255, 0, 255), (entity.x, entity.y, entity.width, entity.height))
 
-
-class PlayerCollisionComponent(Component):
-    
-    def add(self, entity):
-        verify_attrs(entity, ['x', 'y', ('score', 0), ('chasing', False)])
-        entity.register_handler('collision', self.handle_collision)
-
-    def remove(self, entity):
-        entity.unregister_handler('collision', self.handle_collision)
-    
-    def handle_collision(self, entity, other):
-        if 'player' in other.tags and entity.chasing:
-            if get_midpoint(entity).get_distance(get_midpoint(other)) < entity.width/2 + other.width/2:
-                game.get_game().change_mode(mode.BetweenRoundMode())
                 
 class MouseMovementComponent(Component):
     
@@ -190,7 +176,7 @@ class HumanGrabberComponent(Component):
         entity.register_handler('update', self.handle_update)
     
     def remove(self, entity):
-        entity.unregister_handler('intput', self.handle_input)
+        entity.unregister_handler('input', self.handle_input)
         entity.unregister_handler('update', self.handle_update)
         
     def handle_input(self, entity, event):
@@ -221,7 +207,40 @@ class HumanGrabberComponent(Component):
         if entity.grabbed_human:
             entity.grabbed_human.x = entity.x - entity.grabbed_human.width/2
             entity.grabbed_human.y = entity.y - entity.grabbed_human.height/2
+
+
+class HumanPlacementComponent(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x','y', 'width', 'height'])
+        entity.register_handler('grabbed', self.handle_grabbed)
+        entity.register_handler('released', self.handle_released)
+
+    def remove(self, entity):
+        entity.remove_handler('grabbed', self.handle_grabbed)
+        entity.remove_handler('released', self.handle_released)
         
+    def handle_grabbed(self, entity, grabber):
+        pass
+    
+    def handle_released(self, entity, releaser):
+        location = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))[0]
+        location.handle('human_placed', entity)
+
+
+class HumanAcceptor(Component):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['humans'])
+        entity.register_handler('human_placed', self.handle_human_placed)
+    
+    def remove(self, entity):
+        entity.remove_handler('human_placed', self.handle_human_placed)
+        
+    def handle_human_placed(self, entity, human):
+        entity.humans.append(human)
+    
+
 def verify_attrs(entity, attrs):
     missing_attrs = []
     for attr in attrs:
