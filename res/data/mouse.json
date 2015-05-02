@@ -4,7 +4,6 @@
 	"y" : 0,
 	"width" : 2,
 	"height" : 2,
-	"grabbed_human" : null,
 	"grab_range" : 100,
 	"components" : ["DrawHitBoxComponent","MouseMovementComponent","HumanGrabberComponent"],
 	"tags" : ["update"]

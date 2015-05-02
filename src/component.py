@@ -185,7 +185,7 @@ class MouseMovementComponent(Component):
 class HumanGrabberComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y', 'grab_range'])
+        verify_attrs(entity, ['x', 'y', 'grab_range', ('grabbed_human', None)])
         entity.register_handler('input', self.handle_input)
         entity.register_handler('update', self.handle_update)
     

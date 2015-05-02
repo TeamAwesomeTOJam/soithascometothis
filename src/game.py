@@ -46,6 +46,10 @@ class Game(object):
         
     def run(self, mode):     
         self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('human'))
+        self.entity_manager.add_entity(Entity('human'))
         self.entity_manager.add_entity(Entity('mouse'))
 
         self.change_mode(mode)
