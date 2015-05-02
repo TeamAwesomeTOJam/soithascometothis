@@ -67,7 +67,7 @@ def LoadEntityData(prefix, key):
     if 'includes' in definition:
         flattened = {}
         for include_name in definition['includes']:
-            include = game.get_game().resource_manager.get('data', include_name)
+            include = game.get_game().resource_manager.get('entity', include_name)
             for field in include._fields:
                 flattened[field] = getattr(include, field)
         for key, value in definition.iteritems():
