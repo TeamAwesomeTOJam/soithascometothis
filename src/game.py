@@ -3,9 +3,11 @@ import pygame
 import random
 
 import component
+import event
 import componentmanager
+import entity
 from entitymanager import EntityManager
-from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInputMapping, LoadSound, LoadText
+from resourcemanager import ResourceManager, LoadEntityData, LoadImage, LoadInputMapping, LoadSound, LoadText, LoadEvent
 from entity import Entity
 from render import View, BackgroundLayer, SimpleLayer, SolidBackgroundLayer
 from input import InputManager
@@ -34,6 +36,7 @@ class Game(object):
         
         self.component_manager = componentmanager.ComponentManager()
         self.component_manager.register_module(component)
+        self.component_manager.register_module(event)
         
         self.entity_manager = EntityManager()
             
@@ -43,6 +46,7 @@ class Game(object):
         self.resource_manager.register_loader('inputmap', LoadInputMapping)
         self.resource_manager.register_loader('sound', LoadSound)
         self.resource_manager.register_loader('text', LoadText)
+        self.resource_manager.register_loader('event', LoadEvent)
 
         self.input_manager = InputManager()
         self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), 
@@ -63,11 +67,8 @@ class Game(object):
             self.entity_manager.add_entity(Entity('human', name=random.choice(names), home_x = pos.x, home_y = pos.y))
         
         self.entity_manager.add_entity(Entity('mouse'))
-        
         self.entity_manager.add_entity(Entity('farm'))
-        
         self.entity_manager.add_entity(Entity("camp"))
-        
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
         self.entity_manager.add_entity(Entity('camp-defense-meter-ui'))
         self.entity_manager.add_entity(Entity('camp-shelter-meter-ui'))

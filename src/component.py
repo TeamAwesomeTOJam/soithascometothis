@@ -40,17 +40,18 @@ class AnimationComponent(Component):
         entity.unregister_handler('play-animation', self.on_play_animation)
         
     def on_update(self, entity, dt):
+        current_animation = game.get_game().resource_manager.get('animation', entity.current_animation)
         entity.animation_pos += dt
-        if entity.animation_pos >= getattr(entity.animations, entity.current_animation).duration:
+        if entity.animation_pos >= current_animation.duration:
             if entity.animation_should_loop:
-                entity.animation_pos = entity.animation_pos % getattr(entity.animations, entity.current_animation).duration
+                entity.animation_pos = entity.animation_pos % current_animation.duration
             else:
                 entity.handle('animation-finished', entity.current_animation)
                 entity.current_animation = 'default'
                 entity.animation_pos = 0
                 entity.animation_should_loop = True
-        frame_number = int(entity.animation_pos / getattr(entity.animations, entity.current_animation).duration * len(getattr(entity.animations, entity.current_animation).frames))
-        entity.image = getattr(entity.animations, entity.current_animation).frames[frame_number]
+        frame_number = int(entity.animation_pos / current_animation.duration * len(current_animation.frames))
+        entity.image = current_animation.frames[frame_number]
         
     def on_play_animation(self, entity, animation, loop=False):
         if animation == entity.current_animation and entity.animation_should_loop and loop:
