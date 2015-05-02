@@ -52,7 +52,7 @@ class EntityDataLoader(object):
         return freezejson.freeze_value(definition)
     
 def LoadEntityData(prefix, key):
-    with open(os.path.join(prefix, 'data', key + '.json')) as in_file:
+    with open(os.path.join(prefix, 'entities', key + '.json')) as in_file:
         definition = json.load(in_file)
     
     if 'animations' in definition:
@@ -91,7 +91,7 @@ def LoadImage(prefix, key):
     return image_surface
 
 def LoadInputMapping(prefix, key):
-    with open(os.path.join(prefix, 'input', key + '.json')) as in_file:
+    with open(os.path.join(prefix, 'inputmaps', key + '.json')) as in_file:
         definition = json.load(in_file)
         
     return definition

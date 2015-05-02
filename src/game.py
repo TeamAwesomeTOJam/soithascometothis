@@ -36,7 +36,7 @@ class Game(object):
         self.entity_manager = EntityManager()
             
         self.resource_manager = ResourceManager(resource_path)
-        self.resource_manager.register_loader('data', LoadEntityData)
+        self.resource_manager.register_loader('entity', LoadEntityData)
         self.resource_manager.register_loader('image', LoadImage)
         self.resource_manager.register_loader('inputmap', LoadInputMapping)
         self.resource_manager.register_loader('sound', LoadSound)
