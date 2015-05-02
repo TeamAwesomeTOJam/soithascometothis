@@ -1,9 +1,0 @@
-{
-    "x" : 0,
-    "y" : 10,
-    "target" : "player1",
-    "direction" : 1,
-    "includes" : ["scoreui"]
-}
-    
-    
