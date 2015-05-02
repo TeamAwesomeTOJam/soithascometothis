@@ -180,7 +180,41 @@ class MouseMovementComponent(object):
         if event.action == 'MOUSE_POSITION':
             entity.x = event.value[0]
             entity.y = event.value[1]
-                    
+
+
+class HumanGrabberComponent(object):
+    
+    def add(self, entity):
+        verify_attrs(entity, ['x', 'y'])
+        entity.register_handler('input', self.handle_input)
+        entity.register_handler('update', self.handle_update)
+    
+    def remove(self, entity):
+        entity.unregister_handler('intput', self.handle_input)
+        entity.unregister_handler('update', self.handle_update)
+        
+    def handle_input(self, entity, event):
+        if event.action == 'CLICK':
+            humans = game.get_game().entity_manager.get_by_tag('human')
+            my_pos = Vec2d(entity.x, entity.y)
+            closest = None
+            distance = 0
+            for h in humans:
+                other_pos = get_midpoint(h)
+                if closest == None:
+                    closest = h
+                    distance = my_pos.get_distance(other_pos)
+                else:
+                    new_distance = my_pos.get_distance(other_pos)
+                    if new_distance < distance:
+                        closest = h
+                        distance = new_distance
+            entity.grabbed_human = closest
+    
+    def handle_update(self, entity, dt):
+        if entity.grabbed_human:
+            entity.grabbed_human.x = entity.x
+            entity.grabbed_human.y = entity.y
         
 def verify_attrs(entity, attrs):
     missing_attrs = []

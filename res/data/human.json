@@ -7,6 +7,6 @@
 	"hunger" : 0,
 	"thirst" : 0,
 	"energy" : 100,
-	"tags" : ["draw"],
+	"tags" : ["draw","human"],
 	"components" : ["DrawHitBoxComponent"]
 }

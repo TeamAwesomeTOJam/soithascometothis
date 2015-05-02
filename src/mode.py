@@ -86,7 +86,8 @@ class MorningMode(Mode):
         entity.handle('input', event)
     
     def update(self, dt):
-        pass
+        for entity in game.get_game().entity_manager.get_by_tag('update'):
+            entity.handle('update', dt)
     
     def draw(self):
         game.get_game().view.draw()
