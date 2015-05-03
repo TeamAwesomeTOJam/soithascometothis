@@ -103,7 +103,7 @@ class DayMode(Mode):
     def enter(self):
         self.music = game.get_game().resource_manager.get('sound', 'day.ogg')
         self.music.play()
-        self.time_elapsed = 0
+        game.get_game().entity_manager.add_entity(Entity('event', event='bear-attack'))
     
     def leave(self):
         self.music.stop()
@@ -113,18 +113,16 @@ class DayMode(Mode):
             location.handle('day')
             
     def handle_event(self, event):
-        pass
+        game.get_game().entity_manager.get_by_name('mouse').handle('input',event)
     
     def update(self, dt):
-        for entity in game.get_game().entity_manager.get_by_tag('update'):
-            entity.handle('update', dt)
-        
-        self.time_elapsed += dt
-        if self.time_elapsed > self.ttl:
-            game.get_game().change_mode(EveningMode())
+        pass
     
     def draw(self):
         game.get_game().view.draw()
+        
+    def event_over(self):
+        game.get_game().change_mode(EveningMode())
         
         
 class EveningMode(Mode):

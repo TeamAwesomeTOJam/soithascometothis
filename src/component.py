@@ -364,7 +364,7 @@ class CampLocationMouseOverComponent(Component):
 class GoHomeComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y', 'home_x', 'home_y'])
+        verify_attrs(entity, ['x', 'y', 'home_x', 'home_y', ('location', None)])
         entity.register_handler('go_home', self.handle_go_home)
         
     def remove (self, entity):
@@ -373,6 +373,9 @@ class GoHomeComponent(Component):
     def handle_go_home(self, entity):
         entity.x = entity.home_x
         entity.y = entity.home_y
+        if entity.location:
+            entity.location.handle('human_removed',entity)
+            entity.location = None
 
 class RecordUpdateComponent(Component):
     

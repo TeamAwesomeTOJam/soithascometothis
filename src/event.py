@@ -38,7 +38,7 @@ class EventComponent(Component):
                 human_name = location.humans[0].name
             else:
                 human_name = ''
-            entity.text = entity.current_node.text.format(human_name=human_name)
+            entity.text = entity.current_node.text.format(human=human_name)
             
             # Clear old options and add new options
             for option_entity in entity.options:
@@ -66,6 +66,7 @@ class EventOptionComponent(Component):
             for option_entity in entity.event.options:
                 game.get_game().entity_manager.remove_entity(option_entity)
             game.get_game().entity_manager.remove_entity(entity.event)
+            game.get_game().mode.event_over()
             return
         
         pass_ = True

@@ -1,0 +1,51 @@
+{
+    "location" : "The Farm",
+    "nodes" : [{
+        "id" : 1,
+        "text" : "A bear attacks {human}!",
+        "options" : [{
+            "text" : "Fight it.",
+            "requirements" : {"human_strength" : 30},
+            "pass_" : 2,
+            "fail" : 3
+        },
+        {
+            "text" : "Run away.",
+            "requirements" : {"human_energy" : 30},
+            "pass_" : 4,
+            "fail" : 5
+        }]
+    },
+    {
+        "id" : 2,
+        "text" : "{human} kills the bear! Bear meat for dinner.",
+        "effects" : {"camp_food" : 20, "human_health" : -5},
+        "options" : [{
+            "text" : "Yay."
+        }]
+    },
+    {
+        "id" : 3,
+        "text" : "The bear mauls {human}.",
+        "effects" : {"human_health" : -15},
+        "options" : [{
+            "text" : "Ouch."
+        }]
+    },
+    {
+    	"id" : 4,
+    	"text" : "{human} successfully runs away.",
+    	"effects" : {"human_energy" : -15},
+    	"options" : [{
+    		"text" : "Good."
+    	}]
+    },
+    {
+    	"id" : 5,
+    	"text" : "The bear catches up to {human} and mauls them.",
+    	"effects" : {"human_energy" : -10, "human_health" : -15},
+    	"options" : [{
+    		"text" : "Ouch."
+		}]
+    }]
+}

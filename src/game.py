@@ -98,7 +98,6 @@ class Game(object):
 
         self.entity_manager.commit_changes()
         
-        self.entity_manager.add_entity(Entity('event', event='burried-supplies'))
 
         self.change_mode(mode)
         self.running = True
@@ -132,6 +131,7 @@ class Game(object):
             self.mode.leave()
         self.mode = new_mode
         self.mode.enter()
+        self.entity_manager.commit_changes()
 
 def get_game():
     return _game
