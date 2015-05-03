@@ -7,6 +7,18 @@ import game
 import mode
 from vec2d import Vec2d
 
+import random
+
+def chance(c):
+    return random.randrange(0,100) < c
+
+def small():
+    return random.randrange(1,5)
+def mid():
+    return random.randrange(5,10)
+def big():
+    return random.randrange(10,15)
+
 
 FACING = ['right', 'down', 'left', 'up']
 
@@ -427,18 +439,43 @@ class HumanNeedsComponent(Component):
         
     def handle_day(self, entity):
         camp_entity = game.get_game().entity_manager.get_by_name('camp')
-        if camp_entity.food > 5:
-            camp_entity.food -= 5
-        else:
-            entity.hunger += 5
         
-        if camp_entity.water > 5:
-            camp_entity.water -= 5
-        else:
-            entity.thirst += 5
+        food_eaten = min(entity.food_need, camp_entity.food)
+        camp_entity.food -= food_eaten
+        entity.hunger += entity.food_need - food_eaten
+        
+        water_consumed = min(entity.water_need, camp_entity.water)
+        camp_entity.water -= water_consumed
+        entity.thirst += entity.water_need - water_consumed
+        if water_consumed and chance(3):
+            a = small()
+            entity.health -= a
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s drank bad water and lost %s health.' % (entity.name, str(a)))
+            
             
         shelter_percent = camp_entity.shelter/100.0
-        entity.health -= int(10 * (1 - shelter_percent))
+        exposure = int(mid() * (1 - shelter_percent))
+        if exposure > entity.health:
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of exposure!' % entity.name)
+            game.get_game().entity_manager.remove_entity(entity)
+            return
+        else:
+            entity.health -= exposure
+        
+        if entity.thirst > 100:
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of thirst!' % entity.name)
+            game.get_game().entity_manager.remove_entity(entity)
+            return
+        
+        if entity.hunger > 100:
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of hunger!' % entity.name)
+            game.get_game().entity_manager.remove_entity(entity)
+            return
+        
+        if entity.health <= 0:
+            game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of sickness!' % entity.name)
+            game.get_game().entity_manager.remove_entity(entity)
+            return
 
 def get_entities_in_front(entity):
     COLLIDE_BOX_WIDTH = 100

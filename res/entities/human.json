@@ -13,6 +13,9 @@
 	"energy" : 100,
 	"strength" : 100,
 	
+	"food_need" : 5,
+	"water_need" : 5,
+	
 	"tags" : ["draw","human", "update"],
 	"components" : ["DrawHitBoxComponent",
 					"HumanPlacementComponent",

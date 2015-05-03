@@ -1,10 +1,10 @@
 {
 	"name" : "camp",
-	"defense" : 100,
-	"shelter" : 100,
-	"food" : 75,
-	"water" : 100,
-	"medicine" : 100,
+	"defense" : 5,
+	"shelter" : 20,
+	"food" : 50,
+	"water" : 50,
+	"medicine" : 40,
 	
 	"components" : [],
 	"tags" : []
