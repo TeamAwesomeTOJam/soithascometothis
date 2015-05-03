@@ -1,4 +1,6 @@
 {
-    "components" : ["EventOptionComponent"],
-    "tags" : ["draw-ui"]
+    "width" : 300,
+    "height" : 100,
+    "components" : ["EventOptionComponent", "DrawHitBoxComponent", "DrawTextComponent"],
+    "tags" : ["draw-ui", "ui"]
 }
