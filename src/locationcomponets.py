@@ -1,5 +1,6 @@
-from component import Component, verify_attrs
+from component import Component
 import game
+from util import *
 
 class FarmComponent(Component):
     
