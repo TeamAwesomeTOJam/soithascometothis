@@ -17,7 +17,7 @@
 	"water_need" : 5,
 	
 	"tags" : ["draw-human","human", "update"],
-	"components" : ["DrawHitBoxComponent",
+	"components" : ["DrawComponent",
 					"HumanPlacementComponent",
 					"HumanMouseOverComponent",
 					"GoHomeComponent",

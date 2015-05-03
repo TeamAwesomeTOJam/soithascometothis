@@ -67,7 +67,8 @@ class Game(object):
         
         for i in range(num_humans):
             pos = Vec2d(100,0).rotated(360.0*i/(num_humans)) + origin
-            self.entity_manager.add_entity(Entity('human', name=random.choice(names), home_x = pos.x, home_y = pos.y))
+            image = random.choice(('male.png', 'female.png'))
+            self.entity_manager.add_entity(Entity('human', name=random.choice(names), home_x=pos.x, home_y=pos.y, image=image))
         
         self.entity_manager.add_entity(Entity('mouse'))
         

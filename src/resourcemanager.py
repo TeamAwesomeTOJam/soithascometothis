@@ -60,12 +60,7 @@ def LoadEntityData(prefix, key):
     
 def LoadImage(prefix, key):
     image_surface = pygame.image.load(os.path.join(prefix, 'images', key))
-    image_surface.set_alpha(None)
     image_surface.convert()
-    if 'Doda' in key:
-        image_surface.set_colorkey((255, 125, 255))
-    elif not 'passable' in key:
-        image_surface.set_colorkey((255, 0, 255))
     return image_surface
 
 def LoadInputMapping(prefix, key):
