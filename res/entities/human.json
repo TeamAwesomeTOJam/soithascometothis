@@ -7,11 +7,11 @@
 	"home_x" : 10,
 	"home_y" : 10,
 	
-	"health" : 100,
-	"hunger" : 0,
-	"thirst" : 0,
-	"energy" : 100,
-	"strength" : 100,
+	"health" : 90,
+	"hunger" : 50,
+	"thirst" : 50,
+	"energy" : 75,
+	"strength" : 50,
 	
 	"food_need" : 5,
 	"water_need" : 5,

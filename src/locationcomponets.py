@@ -13,9 +13,16 @@ class FarmComponent(Component):
         
     def handle_day(self, entity):
         if entity.humans:
-            entity.humans[0].energy -= 10
-            game.get_game().entity_manager.get_by_name('camp').food += 10
-            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Farm', 'A tough day on the farm. Gained 10 food, but %s lost 10 energy.' % entity.humans[0].name)
+            h = entity.humans[0]
+            if h.energy:
+                energy_spent = min(mid(), h.energy)
+                h.energy -= energy_spent
+                food_farmed = mid()
+                camp().food = clamp(camp().food + food_farmed)
+                h.strength = clamp(h.strength + small())
+                report('Farm', '%s collected %s food' %(h.name, str(food_farmed)))
+            else:
+                report('Farm',"%s was to tired to work on the farm" % h.name)
 
 class WallsComponent(Component):
     

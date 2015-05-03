@@ -1,6 +1,16 @@
 import random
 import pygame
 from vec2d import Vec2d
+import game
+
+def report(name,report):
+    game.get_game().entity_manager.get_by_name('report').handle('record_update', name, report)
+
+def camp():
+    return game.get_game().entity_manager.get_by_name('camp')
+
+def clamp(v):
+    return max(min(v,100),0)
 
 def chance(c):
     return random.randrange(0,100) < c
