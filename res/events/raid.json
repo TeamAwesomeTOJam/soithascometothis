@@ -1,28 +1,29 @@
-[{
-    "id" : 1,
-    "text" : "A thing is happening.",
-    "options" : [{
-        "text" : "Frob the doodad.",
-        "requirements" : {"energy" : 50},
-        "pass_" : 2,
-        "fail" : 3
-    }]
-},
 {
-    "id" : 2,
-    "text" : "It worked, hurrah!",
-    "effect" : {"food" : 10},
-    "options" : [{
-        "text" : "Ok..."
-    }]
-},
-{
-    "id" : 3,
-    "text" : "It failed, you suck",
-    "effect" : {"food" : -10},
-    "options" : [{
-        "text" : "Ok..."
+    "location" : "The Farm",
+    "nodes" : [{
+        "id" : 1,
+        "text" : "A thing is happening.",
+        "options" : [{
+            "text" : "Frob the doodad.",
+            "requirements" : {"human_energy" : 50},
+            "pass_" : 2,
+            "fail" : 3
+        }]
+    },
+    {
+        "id" : 2,
+        "text" : "It worked, hurrah!",
+        "effects" : {"camp_food" : 10},
+        "options" : [{
+            "text" : "Ok..."
+        }]
+    },
+    {
+        "id" : 3,
+        "text" : "It failed, you suck",
+        "effects" : {"camp_food" : -10},
+        "options" : [{
+            "text" : "Ok..."
+        }]
     }]
 }
-]
-
