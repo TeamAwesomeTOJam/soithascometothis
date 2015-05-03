@@ -4,6 +4,7 @@ import random
 
 import component
 import event
+import locationcomponets
 import componentmanager
 import entity
 from entitymanager import EntityManager
@@ -37,6 +38,7 @@ class Game(object):
         self.component_manager = componentmanager.ComponentManager()
         self.component_manager.register_module(component)
         self.component_manager.register_module(event)
+        self.component_manager.register_module(locationcomponets)
         
         self.entity_manager = EntityManager()
             
@@ -68,6 +70,10 @@ class Game(object):
         
         self.entity_manager.add_entity(Entity('mouse'))
         self.entity_manager.add_entity(Entity('farm'))
+        self.entity_manager.add_entity(Entity('wall'))
+        self.entity_manager.add_entity(Entity('well'))
+        self.entity_manager.add_entity(Entity('rest-camp'))
+        self.entity_manager.add_entity(Entity('work-camp'))
         self.entity_manager.add_entity(Entity("camp"))
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
         self.entity_manager.add_entity(Entity('camp-defense-meter-ui'))

@@ -389,21 +389,6 @@ class RecordUpdateComponent(Component):
         entity.updates[location_name] = update_description
         
 
-class FarmComponent(Component):
-    
-    def add(self, entity):
-        verify_attrs(entity, [('humans', [])])
-        entity.register_handler('day', self.handle_day)
-        
-    def remove(self, entity):
-        entity.unregister_handler('day', self.handle_day)
-        
-    def handle_day(self, entity):
-        if entity.humans:
-            entity.humans[0].energy -= 10
-            game.get_game().entity_manager.get_by_name('camp').food += 10
-            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Farm', 'A tough day on the farm. Gained 10 food, but %s lost 10 energy.' % entity.humans[0].name)
-
 class DrawTextComponent(Component):
     def add(self, entity):
         verify_attrs(entity, ['text', 'x', 'y', 'width', 'height'])

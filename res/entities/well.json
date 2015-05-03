@@ -1,0 +1,9 @@
+{
+    "name" : "The Well",
+	"x" : 250,
+	"y" : 500,
+	"description" : "Well\nUses energy\nProduces Water",
+	"components+" : ["WellComponent"],
+	"includes" : ["camp-location"]
+
+}
