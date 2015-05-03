@@ -204,7 +204,7 @@ class HumanGrabberComponent(Component):
 class HumanPlacementComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x','y', 'width', 'height'])
+        verify_attrs(entity, ['x','y', 'width', 'height', ('location', None)])
         entity.register_handler('grabbed', self.handle_grabbed)
         entity.register_handler('released', self.handle_released)
 
@@ -213,14 +213,20 @@ class HumanPlacementComponent(Component):
         entity.unregister_handler('released', self.handle_released)
         
     def handle_grabbed(self, entity, grabber):
-        pass
+        if entity.location:
+            entity.location.handle('human_removed', entity)
+            entity.location = None
     
     def handle_released(self, entity, releaser):
         locations = game.get_game().entity_manager.get_in_area('location', (entity.x, entity.y, entity.width, entity.height))
+        location_found = False
         for location in locations:
-            location.handle('human_placed', entity)
-            break # Just send the event to the first location in the set
-        if not locations:
+            if not location.humans:
+                location.handle('human_placed', entity)
+                entity.location = location
+                location_found = True
+                break # Just send the event to the first location in the set
+        if not location_found:
             entity.x = entity.home_x
             entity.y = entity.home_y
 
@@ -270,14 +276,20 @@ class HumanAcceptor(Component):
     def add(self, entity):
         verify_attrs(entity, [('humans', []), 'x', 'y', 'human_x', 'human_y'])
         entity.register_handler('human_placed', self.handle_human_placed)
+        entity.register_handler('human_removed', self.handle_human_removed)
     
     def remove(self, entity):
         entity.unregister_handler('human_placed', self.handle_human_placed)
+        entity.unregister_handler('human_removed', self.handle_human_removed)
+        
         
     def handle_human_placed(self, entity, human):
         entity.humans.append(human)
         human.x = entity.human_x + entity.x
         human.y = entity.human_y + entity.y
+    
+    def handle_human_removed(self, entity, human):
+        entity.humans.remove(human)
 
 
 class ResourceMeterUIComponent(Component):
