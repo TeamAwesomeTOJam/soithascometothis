@@ -66,7 +66,7 @@ class RestComponent(Component):
             elif camp().shelter < 70:
                 amount_rested = min(mid(), 100 - h.energy)
                 h.energy += amount_rested
-                report('Rest', '%s got a good of rest in the mediocre shelter and gained %s energy.' % (h.name, amount_rested))
+                report('Rest', '%s got a good of rest in the shelter and gained %s energy.' % (h.name, amount_rested))
             else:
                 amount_rested = min(big(), 100 - h.energy)
                 h.energy += amount_rested
