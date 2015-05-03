@@ -1,0 +1,41 @@
+{
+    "location" : "The Farm",
+    "nodes" : [{
+        "id" : 1,
+        "text" : "You find something buried in the earth",
+        "options" : [{
+            "text" : "Dig it out.",
+            "requirements" : {"human_strength" : 20},
+            "pass_" : 2,
+            "fail" : 3
+        },
+        {
+            "text" : "Ignore it.",
+            "requirements" : {},
+            "pass_" : 4
+        }]
+    },
+    {
+        "id" : 2,
+        "text" : "You find a buried crate of food, but you are tired from digging.",
+        "effects" : {"camp_food" : 20, "human_energy" : -5},
+        "options" : [{
+            "text" : "OK"
+        }]
+    },
+    {
+        "id" : 3,
+        "text" : "You don't have the strength to dig it out and are tired from digging.",
+        "effects" : {"human_energy" : -5},
+        "options" : [{
+            "text" : "OK."
+        }]
+    },
+    {
+    	"id" : 4,
+    	"text" : "You successfully ignore it. Nothing Happens",
+    	"options" : [{
+    		"text" : "OK."
+    	}]
+    }]
+}

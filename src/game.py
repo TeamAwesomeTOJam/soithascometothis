@@ -98,7 +98,7 @@ class Game(object):
 
         self.entity_manager.commit_changes()
         
-        self.entity_manager.add_entity(Entity('event', event='raid'))
+        self.entity_manager.add_entity(Entity('event', event='burried-supplies'))
 
         self.change_mode(mode)
         self.running = True
