@@ -3,37 +3,5 @@
     "KEY 292" : ["GAME", "FULLSCREEN"],
     "KEY 293" : ["GAME", "RELOAD"],
     
-    "MOUSE 1" : ["mouse","CLICK"],
-    
-    "KEY 119" : ["player1", "UP"],
-    "KEY 115" : ["player1", "DOWN"],
-    "KEY 97"  : ["player1", "LEFT"],
-    "KEY 100" : ["player1", "RIGHT"],
-    "KEY 113" : ["player1", "BUTTON1"],
-    "KEY 101" : ["player1", "BUTTON2"],
- 
-    "0 AXIS -1" : ["player1", "UP"],
-    "0 AXIS +1" : ["player1", "DOWN"],
-    "0 AXIS -0"  : ["player1", "LEFT"],
-    "0 AXIS +0" : ["player1", "RIGHT"],
-    "0 BUTTON 0" : ["player1", "BUTTON1"],
-    "0 BUTTON 1" : ["player1", "BUTTON2"],
-    "0 BUTTON 5" : ["player1", "BUTTON3"],
-    "0 BUTTON 2" : ["player1", "BUTTON3"],
-   
-    "KEY 105" : ["player2", "UP"],
-    "KEY 107" : ["player2", "DOWN"],
-    "KEY 106" : ["player2", "LEFT"],
-    "KEY 108" : ["player2", "RIGHT"],
-    "KEY 117" : ["player2", "BUTTON1"],
-    "KEY 111" : ["player2", "BUTTON2"],
-    
-    "1 AXIS -1" : ["player2", "UP"],
-    "1 AXIS +1" : ["player2", "DOWN"],
-    "1 AXIS -0" : ["player2", "LEFT"],
-    "1 AXIS +0" : ["player2", "RIGHT"],
-    "1 BUTTON 0" : ["player2", "BUTTON1"],
-    "1 BUTTON 1" : ["player2", "BUTTON2"],
-    "1 BUTTON 2" : ["player2", "BUTTON3"],
-    "1 BUTTON 5" : ["player2", "BUTTON3"]
+    "MOUSE 1" : ["mouse","CLICK"]
  }
