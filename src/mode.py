@@ -104,6 +104,7 @@ class DayMode(Mode):
         self.music = game.get_game().resource_manager.get('sound', 'day.ogg')
         self.music.play()
         game.get_game().entity_manager.add_entity(Entity('event', event='bear-attack'))
+        game.get_game().entity_manager.get_by_name('mouse').grab = False
     
     def leave(self):
         self.music.stop()
@@ -111,6 +112,7 @@ class DayMode(Mode):
             location.handle('day')
         for location in game.get_game().entity_manager.get_by_tag('human'):
             location.handle('day')
+        game.get_game().entity_manager.get_by_name('mouse').grab = True
             
     def handle_event(self, event):
         game.get_game().entity_manager.get_by_name('mouse').handle('input',event)

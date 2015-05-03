@@ -160,7 +160,7 @@ class MouseMovementComponent(Component):
 class HumanGrabberComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, ['x', 'y', 'grab_range', ('grabbed_human', None), ('dragging', False)])
+        verify_attrs(entity, ['x', 'y', 'grab_range', ('grab', True),('grabbed_human', None), ('dragging', False)])
         entity.register_handler('input', self.handle_input)
         entity.register_handler('update', self.handle_update)
     
@@ -169,6 +169,8 @@ class HumanGrabberComponent(Component):
         entity.unregister_handler('update', self.handle_update)
         
     def handle_input(self, entity, event):
+        if not entity.grab:
+            return
         if event.action == 'CLICK':
             if event.value == 1:
                 humans = game.get_game().entity_manager.get_by_tag('human')
