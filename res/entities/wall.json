@@ -2,6 +2,7 @@
     "name" : "The Walls",
 	"x" : 700,
 	"y" : 300,
+	"image" : "wall.jpg",
 	"description" : "Walls\nUses energy\nImproves Defenses",
 	"components+" : ["WallsComponent"],
 	"includes" : ["camp-location"]

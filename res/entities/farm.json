@@ -2,6 +2,7 @@
     "name" : "The Farm",
 	"x" : 200,
 	"y" : 200,
+	"image" : "farm.jpg",
 	"description" : "Farm\nUses energy\nProduces Food",
 	"components+" : ["FarmComponent"],
 	"includes" : ["camp-location"]

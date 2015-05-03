@@ -117,15 +117,15 @@ class InputMovementComponent(Component):
 class DrawComponent(Component):
     
     def add(self, entity):
-        verify_attrs(entity, [('image_x', 0), ('image_y', 0), 'x', 'y'])
+        verify_attrs(entity, [('image_x', 0), ('image_y', 0), 'x', 'y', 'image'])
         
         entity.register_handler('draw', self.handle_draw)
     
     def remove(self, entity):
         entity.unregister_handler('draw', self.handle_draw)
         
-    def handle_draw(self, entity, surface, transform):
-        surface.blit(game.get_game().resource_manager.get('sprite', entity.image), transform(entity.x + entity.image_x, entity.y + entity.image_y))
+    def handle_draw(self, entity, surface):
+        surface.blit(game.get_game().resource_manager.get('image', entity.image), (entity.x + entity.image_x, entity.y + entity.image_y))
 
 
 class DrawHitBoxComponent(Component):

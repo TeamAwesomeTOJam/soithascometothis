@@ -2,6 +2,7 @@
     "name" : "Hospital",
 	"x" : 100,
 	"y" : 250,
+	"image" : "hospital.jpg",
 	"description" : "Hospital\nFind Medial Supplies",
 	"medicine" : 100,
 	"components+" : ["HospitalComponent"],

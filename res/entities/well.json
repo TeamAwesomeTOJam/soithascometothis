@@ -2,6 +2,7 @@
     "name" : "The Well",
 	"x" : 250,
 	"y" : 500,
+	"image" : "well.jpg",
 	"description" : "Well\nUses energy\nProduces Water",
 	"components+" : ["WellComponent"],
 	"includes" : ["camp-location"]

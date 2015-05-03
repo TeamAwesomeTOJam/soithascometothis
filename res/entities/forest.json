@@ -2,6 +2,7 @@
     "name" : "Forest",
 	"x" : 20,
 	"y" : 20,
+	"image" : "forest.jpg",
 	"description" : "Forest\nHunt for food",
 	"components+" : ["ForestComponent"],
 	"includes" : ["camp-location"]

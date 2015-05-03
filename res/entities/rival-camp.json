@@ -2,6 +2,7 @@
     "name" : "Rival Camp",
 	"x" : 1050,
 	"y" : 500,
+	"image" : "rival_camp.jpg",
 	"description" : "Rival Camp\nSteal Resources",
 	"components+" : ["RivalCampComponent"],
 	"includes" : ["camp-location"]

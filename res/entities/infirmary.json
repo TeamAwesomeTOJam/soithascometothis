@@ -2,6 +2,7 @@
     "name" : "Infirmary",
 	"x" : 800,
 	"y" : 600,
+	"image" : "infirmary.jpg",
 	"description" : "Infirmary\nUses medical supplies\nImproves Health",
 	"components+" : ["InfirmaryComponent"],
 	"includes" : ["camp-location"]

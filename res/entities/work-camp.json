@@ -2,6 +2,7 @@
     "name" : "Work Camp",
 	"x" : 900,
 	"y" : 500,
+	"image" : "carpentry.jpg",
 	"description" : "Work Camp\nCreates Shelter\nUses Energy",
 	"components+" : ["WorkComponent"],
 	"includes" : ["camp-location"]
