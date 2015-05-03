@@ -1,0 +1,9 @@
+{
+    "name" : "Work Camp",
+	"x" : 900,
+	"y" : 500,
+	"description" : "Work Camp\nCreates Shelter\nUses Energy",
+	"components+" : ["WorkComponent"],
+	"includes" : ["camp-location"]
+
+}
