@@ -1,8 +1,8 @@
 {
 	"name" : "info-window",
-	"x" : 1060,
+	"x" : 950,
 	"y" : 24,
-	"width" : 200,
+	"width" : 300,
 	"height" : 300,
 	"text" : "Hello\nWorld",
 	

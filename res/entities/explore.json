@@ -1,7 +1,7 @@
 {
     "name" : "Outside the Wall",
-	"x" : 40,
-	"y" : 550,
+	"x" : 20,
+	"y" : 560,
 	"image" : "explore.jpg",
 	"description" : "Outside the Wall\nUses energy\nFind new locations or resources",
 	"components+" : ["ExploreComponent"],

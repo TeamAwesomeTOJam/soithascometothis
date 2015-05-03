@@ -1,7 +1,7 @@
 {
     "name" : "The Walls",
-	"x" : 700,
-	"y" : 300,
+	"x" : 240,
+	"y" : 200,
 	"image" : "wall.jpg",
 	"description" : "Walls\nUses energy\nImproves Defenses",
 	"components+" : ["WallsComponent"],

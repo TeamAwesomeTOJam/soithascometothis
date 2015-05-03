@@ -1,7 +1,7 @@
 {
     "name" : "Hospital",
-	"x" : 100,
-	"y" : 250,
+	"x" : 240,
+	"y" : 560,
 	"image" : "hospital.jpg",
 	"description" : "Hospital\nFind Medial Supplies",
 	"medicine" : 100,

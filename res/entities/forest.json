@@ -1,7 +1,7 @@
 {
     "name" : "Forest",
-	"x" : 20,
-	"y" : 20,
+	"x" : 480,
+	"y" : 400,
 	"image" : "forest.jpg",
 	"description" : "Forest\nHunt for food",
 	"components+" : ["ForestComponent"],

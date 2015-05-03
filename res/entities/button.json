@@ -1,8 +1,8 @@
 {
-    "x" : 1140,
-    "y" : 680,
-    "width" : 64,
-    "height" : 32,
+    "x" : 1180,
+    "y" : 640,
+    "width" : 70,
+    "height" : 40,
     "text" : "Next",
     "components" : ["AdvanceTurnComponent", "DrawTextComponent"],
     "tags" : ["draw-ui", "ui"]

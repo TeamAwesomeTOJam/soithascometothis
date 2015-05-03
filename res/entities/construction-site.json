@@ -1,7 +1,7 @@
 {
     "name" : "Construction Site",
-	"x" : 220,
-	"y" : 30,
+	"x" : 920,
+	"y" : 440,
 	"image" : "construction.jpg",
 	"description" : "Construction Site\nCollect resources to improve walls and shelter",
 	"components+" : ["ConstructionSiteComponent"],

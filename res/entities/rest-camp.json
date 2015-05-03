@@ -1,7 +1,7 @@
 {
     "name" : "Rest Camp",
-	"x" : 750,
-	"y" : 500,
+	"x" : 20,
+	"y" : 380,
 	"image" : "barracks.jpg",
 	"description" : "Rest Camp\nRestores Energy",
 	"components+" : ["RestComponent"],

@@ -1,7 +1,7 @@
 {
     "name" : "The Farm",
-	"x" : 200,
-	"y" : 200,
+	"x" : 20,
+	"y" : 20,
 	"image" : "farm.jpg",
 	"description" : "Farm\nUses energy\nProduces Food",
 	"components+" : ["FarmComponent"],
