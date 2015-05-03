@@ -76,12 +76,14 @@ class MorningMode(Mode):
         pass
     
     def enter(self):
+        self.music = game.get_game().resource_manager.get('sound', 'morning.ogg')
+        self.music.play()
         humans = game.get_game().entity_manager.get_by_tag('human')
         for h in humans:
             h.handle('go_home')
     
     def leave(self):
-        pass
+        self.music.stop()
     
     def handle_event(self, event):
         entity = game.get_game().entity_manager.get_by_name(event.target)
@@ -98,10 +100,13 @@ class MorningMode(Mode):
 class DayMode(Mode):
     
     def __init__(self):
+        self.music = game.get_game().resource_manager.get('sound', 'day.ogg')
+        self.music.play()
         self.time_elapsed = 0
         self.ttl = 4
     
     def enter(self):
+        self.music.stop()
         self.time_elapsed = 0
     
     def leave(self):
@@ -128,9 +133,12 @@ class DayMode(Mode):
 class EveningMode(Mode):
 
     def enter(self):
+        self.music = game.get_game().resource_manager.get('sound', 'evening.ogg')
+        self.music.play()
         game.get_game().view.add_layer(SimpleLayer('draw-report'))
 
     def leave(self):
+        self.music.stop()
         game.get_game().view.layers.pop()
     
     def handle_event(self, event):
