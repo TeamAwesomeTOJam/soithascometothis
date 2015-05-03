@@ -5,7 +5,7 @@
         "text" : "A thing is happening.",
         "options" : [{
             "text" : "Frob the doodad.",
-            "requirements" : {"human_energy" : 50},
+            "requirements" : {"camp_food" : 100},
             "pass_" : 2,
             "fail" : 3
         }]

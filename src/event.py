@@ -28,13 +28,7 @@ class EventComponent(Component):
             if hasattr(entity.current_node, 'effects'):
                 for target, delta in entity.current_node.effects._asdict().iteritems():
                     target_entity_ident, target_attr = target.split('_')
-                    if target_entity_ident == 'human':
-                        target_entities = {game.get_game().entity_manager.get_by_name(entity.event.location).humans[0]}
-                    elif target_entity_ident == 'camp':
-                        target_entities = {game.get_game().entity_manager.get_by_name('camp')}
-                    elif target_entity_ident == 'all':
-                        target_entities = game.get_game().entity_manager.get_by_tag('human')
-                    
+                    target_entities = _get_target_entities(target_entity_ident, entity.event.location)
                     for target_entity in target_entities:
                         setattr(target_entity, target_attr, getattr(target_entity, target_attr) + delta)
             
@@ -74,5 +68,23 @@ class EventOptionComponent(Component):
             game.get_game().entity_manager.remove_entity(entity.event)
             return
         
+        pass_ = True
+        for target, threshold in entity.option.requirements._asdict().iteritems():
+            target_entity_ident, target_attr = target.split('_')
+            target_entity = _get_target_entities(target_entity_ident, entity.event.event.location).pop()
+            if getattr(target_entity, target_attr) < threshold:
+                pass_ = False
         
-        entity.event.handle('change_node', entity.option.pass_)
+        if pass_:
+            entity.event.handle('change_node', entity.option.pass_)
+        else:
+            entity.event.handle('change_node', entity.option.fail)
+        
+        
+def _get_target_entities(target_ident, location):
+    if target_ident == 'human':
+        return {game.get_game().entity_manager.get_by_name(location).humans[0]}
+    elif target_ident == 'camp':
+        return {game.get_game().entity_manager.get_by_name('camp')}
+    elif target_ident == 'all':
+        return game.get_game().entity_manager.get_by_tag('human')
