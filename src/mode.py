@@ -72,9 +72,6 @@ class GameOverMode(Mode):
 
 class MorningMode(Mode):
     
-    def __init__(self):
-        pass
-    
     def enter(self):
         self.music = game.get_game().resource_manager.get('sound', 'morning.ogg')
         self.music.play()
@@ -100,16 +97,16 @@ class MorningMode(Mode):
 class DayMode(Mode):
     
     def __init__(self):
-        self.music = game.get_game().resource_manager.get('sound', 'day.ogg')
-        self.music.play()
         self.time_elapsed = 0
         self.ttl = 4
     
     def enter(self):
-        self.music.stop()
+        self.music = game.get_game().resource_manager.get('sound', 'day.ogg')
+        self.music.play()
         self.time_elapsed = 0
     
     def leave(self):
+        self.music.stop()
         for location in game.get_game().entity_manager.get_by_tag('location'):
             location.handle('day')
         for location in game.get_game().entity_manager.get_by_tag('human'):
