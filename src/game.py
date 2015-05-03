@@ -52,7 +52,8 @@ class Game(object):
 
         self.input_manager = InputManager()
         self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((128,192,128,255)), 
-                                                        SimpleLayer('draw'), 
+                                                        SimpleLayer('draw-location'),
+                                                        SimpleLayer('draw-human'), 
                                                         SimpleLayer('draw-ui')])
         
     def run(self, mode):
