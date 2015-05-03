@@ -426,17 +426,23 @@ class HumanNeedsComponent(Component):
     def handle_day(self, entity):
         camp_entity = game.get_game().entity_manager.get_by_name('camp')
         
-        food_eaten = min(entity.food_need, camp_entity.food)
+        entity.hunger += entity.food_need
+        food_eaten = min(2*entity.food_need, camp_entity.food)
         camp_entity.food -= food_eaten
-        entity.hunger += entity.food_need - food_eaten
+        if food_eaten < entity.food_need:
+            entity.strength -= min(small(), entity.strength)
+            report(entity.name, "%s didn't eat enough and is getting weaker" % entity.name)
         
-        water_consumed = min(entity.water_need, camp_entity.water)
+        entity.thirst += entity.water_need
+        water_consumed = min(2*entity.water_need, camp_entity.water)
         camp_entity.water -= water_consumed
-        entity.thirst += entity.water_need - water_consumed
         if water_consumed and chance(3):
-            a = small()
+            a = mid()
             entity.health -= a
             game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s drank bad water and lost %s health.' % (entity.name, str(a)))
+        if water_consumed < entity.water_need:
+            entity.strength -= min(small(), entity.strength)
+            report(entity.name, "%s didn't drink enough and is getting weaker" % entity.name)
             
             
         shelter_percent = camp_entity.shelter/100.0

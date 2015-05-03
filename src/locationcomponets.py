@@ -14,15 +14,15 @@ class FarmComponent(Component):
     def handle_day(self, entity):
         if entity.humans:
             h = entity.humans[0]
-            if h.energy:
-                energy_spent = min(mid(), h.energy)
-                h.energy -= energy_spent
-                food_farmed = mid()
-                camp().food = clamp(camp().food + food_farmed)
+            energy_needed = mid()
+            if h.energy >= energy_needed:
+                h.energy -= energy_needed
+                food_farmed = min(mid(),100 - camp().food)
+                camp().food += food_farmed
                 h.strength = clamp(h.strength + small())
-                report('Farm', '%s collected %s food' %(h.name, str(food_farmed)))
+                report('Farm', '%s collected %s food.' %(h.name, str(food_farmed)))
             else:
-                report('Farm',"%s was to tired to work on the farm" % h.name)
+                report('Farm',"%s was to tired to work on the farm." % h.name)
 
 class WallsComponent(Component):
     
@@ -35,9 +35,16 @@ class WallsComponent(Component):
         
     def handle_day(self, entity):
         if entity.humans:
-            entity.humans[0].energy -= 10
-            game.get_game().entity_manager.get_by_name('camp').defense += 10
-            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Walls', 'Working on the walls. Defenses improved by 10, but %s lost 10 energy.' % entity.humans[0].name)
+            h = entity.humans[0]
+            energy_needed = mid()
+            if h.energy >= energy_needed:
+                h.energy -= energy_needed
+                h.strength = clamp(h.strength + small())
+                amount_repaired = min(mid(), camp().defense)
+                camp().defense += amount_repaired
+                report('Walls', '%s improved the walls by %s.' % (h.name, amount_repaired))
+            else:
+                report('Walls', '%s was to tired to repair the walls.' % h.name)
 
 class RestComponent(Component):
     
@@ -50,8 +57,19 @@ class RestComponent(Component):
         
     def handle_day(self, entity):
         if entity.humans:
-            entity.humans[0].energy += 10
-            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Rest', '%s is well rested and gained 10 energy.' % entity.humans[0].name)
+            h = entity.humans[0]
+            if camp().shelter < 20:
+                amount_rested = min(small(), 100 - h.energy)
+                h.energy += amount_rested
+                report('Rest', '%s got a bit of rest in the poor shelter and gained %s energy.' % (h.name, amount_rested))
+            elif camp().shelter < 70:
+                amount_rested = min(mid(), 100 - h.energy)
+                h.energy += amount_rested
+                report('Rest', '%s got a good of rest in the mediocre shelter and gained %s energy.' % (h.name, amount_rested))
+            else:
+                amount_rested = min(big(), 100 - h.energy)
+                h.energy += amount_rested
+                report('Rest', '%s got a great of rest in the shelter and gained %s energy.' % (h.name, amount_rested))
 
 class WorkComponent(Component):
     
@@ -64,9 +82,16 @@ class WorkComponent(Component):
         
     def handle_day(self, entity):
         if entity.humans:
-            entity.humans[0].energy -= 10
-            game.get_game().entity_manager.get_by_name('camp').shelter += 10
-            game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Work', 'Improved the shelter by 10, but %s lost 10 energy.' % entity.humans[0].name)
+            h = entity.humans[0]
+            energy_needed = mid()
+            if h.energy >= energy_needed:
+                h.energy -= energy_needed
+                h.strength = clamp(h.strength + small())
+                amount_repaired = min(mid(), camp().shelter)
+                camp().defense += amount_repaired
+                report('Work', '%s improved the shelter by %s.' % (h.name, amount_repaired))
+            else:
+                report('Work', '%s was to tired to work on the shelter.' % h.name)
 
 
 class WellComponent(Component):
