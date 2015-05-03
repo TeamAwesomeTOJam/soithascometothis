@@ -1,0 +1,8 @@
+{
+    "name" : "Construction Site",
+	"x" : 220,
+	"y" : 30,
+	"description" : "Construction Site\nCollect resources to improve walls and shelter",
+	"components+" : ["ConstructionSiteComponent"],
+	"includes" : ["camp-location"]
+}

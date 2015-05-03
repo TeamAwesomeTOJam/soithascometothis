@@ -1,0 +1,8 @@
+{
+    "name" : "Dump",
+	"x" : 500,
+	"y" : 50,
+	"description" : "Dump\nScavange for resources",
+	"components+" : ["DumpComponent"],
+	"includes" : ["camp-location"]
+}

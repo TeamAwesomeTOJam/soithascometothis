@@ -1,0 +1,8 @@
+{
+    "name" : "Rival Camp",
+	"x" : 1050,
+	"y" : 500,
+	"description" : "Rival Camp\nSteal Resources",
+	"components+" : ["RivalCampComponent"],
+	"includes" : ["camp-location"]
+}

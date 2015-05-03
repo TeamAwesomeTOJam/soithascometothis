@@ -1,0 +1,8 @@
+{
+    "name" : "Forest",
+	"x" : 20,
+	"y" : 20,
+	"description" : "Forest\nHunt for food",
+	"components+" : ["ForestComponent"],
+	"includes" : ["camp-location"]
+}

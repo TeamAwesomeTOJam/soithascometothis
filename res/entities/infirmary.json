@@ -1,0 +1,9 @@
+{
+    "name" : "Infirmary",
+	"x" : 800,
+	"y" : 600,
+	"description" : "Infirmary\nUses medical supplies\nImproves Health",
+	"components+" : ["InfirmaryComponent"],
+	"includes" : ["camp-location"]
+
+}

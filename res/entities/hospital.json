@@ -1,0 +1,8 @@
+{
+    "name" : "Hospital",
+	"x" : 100,
+	"y" : 250,
+	"description" : "Hospital\nFind Medial Supplies",
+	"components+" : ["HospitalComponent"],
+	"includes" : ["camp-location"]
+}

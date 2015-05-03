@@ -69,12 +69,24 @@ class Game(object):
             self.entity_manager.add_entity(Entity('human', name=random.choice(names), home_x = pos.x, home_y = pos.y))
         
         self.entity_manager.add_entity(Entity('mouse'))
+        
         self.entity_manager.add_entity(Entity('farm'))
         self.entity_manager.add_entity(Entity('wall'))
         self.entity_manager.add_entity(Entity('well'))
         self.entity_manager.add_entity(Entity('rest-camp'))
         self.entity_manager.add_entity(Entity('work-camp'))
+        self.entity_manager.add_entity(Entity('explore'))
+        self.entity_manager.add_entity(Entity('infirmary'))
+        
+        self.entity_manager.add_entity(Entity('construction-site'))
+        self.entity_manager.add_entity(Entity('dump'))
+        self.entity_manager.add_entity(Entity('hospital'))
+        self.entity_manager.add_entity(Entity('rival-camp'))
+        self.entity_manager.add_entity(Entity('water-tower'))
+        self.entity_manager.add_entity(Entity('forest'))
+        
         self.entity_manager.add_entity(Entity("camp"))
+        
         self.entity_manager.add_entity(Entity('camp-food-meter-ui'))
         self.entity_manager.add_entity(Entity('camp-defense-meter-ui'))
         self.entity_manager.add_entity(Entity('camp-shelter-meter-ui'))
