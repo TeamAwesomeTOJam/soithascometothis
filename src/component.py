@@ -461,6 +461,7 @@ class HumanNeedsComponent(Component):
         shelter_percent = camp_entity.shelter/100.0
         exposure = int(mid() * (1 - shelter_percent))
         if exposure > entity.health:
+            entity.handle('go_home')
             game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of exposure!' % entity.name)
             game.get_game().entity_manager.remove_entity(entity)
             return
@@ -468,16 +469,19 @@ class HumanNeedsComponent(Component):
             entity.health -= exposure
         
         if entity.thirst > 100:
+            entity.handle('go_home')
             game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of thirst!' % entity.name)
             game.get_game().entity_manager.remove_entity(entity)
             return
         
         if entity.hunger > 100:
+            entity.handle('go_home')
             game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of hunger!' % entity.name)
             game.get_game().entity_manager.remove_entity(entity)
             return
         
         if entity.health <= 0:
+            entity.handle('go_home')
             game.get_game().entity_manager.get_by_name('report').handle('record_update', entity.name, '%s has died of sickness!' % entity.name)
             game.get_game().entity_manager.remove_entity(entity)
             return
