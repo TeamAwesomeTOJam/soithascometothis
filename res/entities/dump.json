@@ -2,6 +2,7 @@
     "name" : "Dump",
 	"x" : 500,
 	"y" : 50,
+	"image" : "dump.jpg",
 	"description" : "Dump\nScavange for resources",
 	"components+" : ["DumpComponent"],
 	"includes" : ["camp-location"]

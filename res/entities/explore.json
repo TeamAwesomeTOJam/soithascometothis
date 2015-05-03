@@ -2,6 +2,7 @@
     "name" : "Outside the Wall",
 	"x" : 40,
 	"y" : 550,
+	"image" : "explore.jpg",
 	"description" : "Outside the Wall\nUses energy\nFind new locations or resources",
 	"components+" : ["ExploreComponent"],
 	"includes" : ["camp-location"]

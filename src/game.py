@@ -51,7 +51,7 @@ class Game(object):
         self.resource_manager.register_loader('event', LoadEvent)
 
         self.input_manager = InputManager()
-        self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((0,0,0,0)), 
+        self.view = View(pygame.display.get_surface(), [SolidBackgroundLayer((128,192,128,255)), 
                                                         SimpleLayer('draw'), 
                                                         SimpleLayer('draw-ui')])
         
