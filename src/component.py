@@ -415,7 +415,30 @@ class DrawTextComponent(Component):
             offset += r.height+10
             
             surface.blit(s, r)
+
+class HumanNeedsComponent(Component):
     
+    def add(self, entity):
+        verify_attrs(entity, ['hunger','thirst'])
+        entity.register_handler('day',self.handle_day)
+        
+    def remove(self, entity):
+        entity.unregister_handler('day', self.handle_day)
+        
+    def handle_day(self, entity):
+        camp_entity = game.get_game().entity_manager.get_by_name('camp')
+        if camp_entity.food > 5:
+            camp_entity.food -= 5
+        else:
+            entity.hunger += 5
+        
+        if camp_entity.water > 5:
+            camp_entity.water -= 5
+        else:
+            entity.thirst += 5
+            
+        shelter_percent = camp_entity.shelter/100.0
+        entity.health -= int(10 * (1 - shelter_percent))
 
 def get_entities_in_front(entity):
     COLLIDE_BOX_WIDTH = 100

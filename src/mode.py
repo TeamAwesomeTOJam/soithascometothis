@@ -107,6 +107,8 @@ class DayMode(Mode):
     def leave(self):
         for location in game.get_game().entity_manager.get_by_tag('location'):
             location.handle('day')
+        for location in game.get_game().entity_manager.get_by_tag('human'):
+            location.handle('day')
             
     def handle_event(self, event):
         pass

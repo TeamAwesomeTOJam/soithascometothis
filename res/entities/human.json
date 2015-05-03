@@ -17,5 +17,6 @@
 	"components" : ["DrawHitBoxComponent",
 					"HumanPlacementComponent",
 					"HumanMouseOverComponent",
-					"GoHomeComponent"]
+					"GoHomeComponent",
+					"HumanNeedsComponent"]
 }

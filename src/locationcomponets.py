@@ -178,7 +178,7 @@ class ConstructionSiteComponent(Component):
     def handle_day(self, entity):
         if entity.humans:
             entity.humans[0].energy -= 10
-            game.get_game().entity_manager.get_by_name('camp').walls += 10
+            game.get_game().entity_manager.get_by_name('camp').defense += 10
             game.get_game().entity_manager.get_by_name('report').handle('record_update', 'Construction Site', '%s found materials to improve the shelter by 10 but lost 10 energy' % entity.humans[0].name)
 
 class DumpComponent(Component):
