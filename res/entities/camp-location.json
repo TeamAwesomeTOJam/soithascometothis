@@ -6,7 +6,7 @@
 	"human_x" : 10,
 	"human_y" : 10,
 	"description" : "",
-	"tags" : ["location", "draw", "update"],
+	"tags" : ["location", "draw-location", "update"],
 	"components" : ["HumanAcceptor",
 					"DrawComponent",
 					"CampLocationMouseOverComponent"]

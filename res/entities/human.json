@@ -16,7 +16,7 @@
 	"food_need" : 5,
 	"water_need" : 5,
 	
-	"tags" : ["draw","human", "update"],
+	"tags" : ["draw-human","human", "update"],
 	"components" : ["DrawHitBoxComponent",
 					"HumanPlacementComponent",
 					"HumanMouseOverComponent",
