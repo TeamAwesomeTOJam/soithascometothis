@@ -1,18 +1,21 @@
+import weakref
+
+
 class SpatialMap(object):
     
     def __init__(self, grid_size):
         self.grid_size = grid_size
         self.map = {}
-        self.reverse_map = {}
+        self.reverse_map = weakref.WeakKeyDictionary()
     
     def add(self, entity):
         try:
             grid_squares = self._get_grid_squares((entity.x, entity.y, entity.width, entity.height))
             for square in grid_squares:
-                if square in self.map:
-                    self.map[square].add(entity)
-                else:
-                    self.map[square] = {entity}
+                if not square in self.map:
+                    self.map[square] = weakref.WeakSet()
+                    
+                self.map[square].add(entity)
                 
             self.reverse_map[entity] = grid_squares
         except AttributeError:

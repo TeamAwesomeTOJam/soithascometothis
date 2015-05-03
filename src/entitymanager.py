@@ -1,3 +1,5 @@
+import weakref
+
 import spatialmap
 
 
@@ -8,7 +10,7 @@ class EntityManager(object):
     
     def __init__(self):
         self.entities = set()
-        self._entities_by_name = {}
+        self._entities_by_name = weakref.WeakValueDictionary()
         self._entities_by_tag = {}
         self._spatial_maps = {}
         self.remove_list = []
@@ -43,16 +45,13 @@ class EntityManager(object):
             
             if hasattr(entity, 'tags'):
                 for tag in entity.tags:
-                    if tag in self._entities_by_tag:
-                        self._entities_by_tag[tag].add(entity)
-                    else:
-                        self._entities_by_tag[tag] = {entity}
+                    if not tag in self._entities_by_tag:
+                        self._entities_by_tag[tag] = weakref.WeakSet()
+                    self._entities_by_tag[tag].add(entity)
                     
-                    if tag in self._spatial_maps:
-                        self._spatial_maps[tag].add(entity)
-                    else:
+                    if not tag in self._spatial_maps:
                         self._spatial_maps[tag] = spatialmap.SpatialMap(GRID_SIZE)
-                        self._spatial_maps[tag].add(entity)
+                    self._spatial_maps[tag].add(entity)
         
         self.add_list = []
         self.remove_list = []
