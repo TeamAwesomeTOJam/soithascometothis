@@ -3,7 +3,7 @@ from abc import ABCMeta, abstractmethod
 import game
 import entity
 from entity import Entity
-from _pyio import __metaclass__
+from render import SimpleLayer
 
 
 class Mode:
@@ -128,10 +128,10 @@ class DayMode(Mode):
 class EveningMode(Mode):
 
     def enter(self):
-        pass    
+        game.get_game().view.add_layer(SimpleLayer('draw-report'))
 
     def leave(self):
-        pass
+        game.get_game().view.layers.pop()
     
     def handle_event(self, event):
         entity = game.get_game().entity_manager.get_by_name(event.target)

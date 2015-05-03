@@ -1,5 +1,10 @@
 {
     "name" : "report",
-    "components" : ["RecordUpdateComponent"],
-    "tags" : []    
+    "x" : 100,
+    "y" : 100,
+    "width" : 500,
+    "height" : 600,
+    "text" : "",
+    "components" : ["RecordUpdateComponent", "DrawTextComponent"],
+    "tags" : ["draw-report"]
 }

@@ -385,7 +385,15 @@ class RecordUpdateComponent(Component):
         
     def handle_record_update(self, entity, location_name, update_description):
         entity.updates[location_name] = update_description
+        self._update_text(entity)
         
+    def _update_text(self, entity):
+        entity.text = ""
+        for subject, update in entity.updates.iteritems():
+            update_string = '%s:\n' % (subject,)
+            update_string += '%s\n' % (update,)
+            entity.text += update_string
+            
 
 class DrawTextComponent(Component):
     def add(self, entity):
