@@ -3,6 +3,7 @@
 	"x" : 100,
 	"y" : 250,
 	"description" : "Hospital\nFind Medial Supplies",
+	"medicine" : 100,
 	"components+" : ["HospitalComponent"],
 	"includes" : ["camp-location"]
 }

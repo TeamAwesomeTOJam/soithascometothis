@@ -2,6 +2,7 @@
     "name" : "Water Tower",
 	"x" : 1000,
 	"y" : 300,
+	"water" : 100,
 	"description" : "Water Tower\nFind fresh water",
 	"components+" : ["WaterTowerComponent"],
 	"includes" : ["camp-location"]
